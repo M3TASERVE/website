@@ -1,2 +1,11 @@
-{{ $last := sub (len .Params.contributors) 1 }}
-<p><small>Posted{{ if .Params.categories -}}&nbsp;in&nbsp;{{ range $index, $category := .Params.categories -}}{{ if gt $index 0 -}}, {{ end -}}<a class="stretched-link position-relative link-muted" href="{{ "/categories/" | absURL }}{{ . | urlize }}/">{{ . }}</a>{{ end -}}{{ end -}}&nbsp;on&nbsp;{{ .PublishDate.Format "January 2, 2006" }} by {{ if .Params.contributors -}}{{ range $index, $contributor := .Params.contributors }}{{ if gt $index 0 }}{{ if eq $index $last }} and {{ else }}, {{ end }}{{ end }}<a class="stretched-link position-relative" href="{{ "/contributors/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end -}}{{ end -}}&nbsp;&hyphen;&nbsp;<strong>{{ .ReadingTime -}}&nbsp;min read</strong></small><p>
+<div class="d-flex align-items-center flex-wrap card-footer-text">
+    <p class="mb-0">
+        <img src="/images/common/clock.svg"/>
+        {{ .ReadingTime -}}&nbsp;MIN READ&nbsp;&#8212;&nbsp;
+        posted {{ .PublishDate.Format "January 2, 2006" }} by {{ if .Params.contributors -}}{{ range $index,
+        $contributor := .Params.contributors }}{{ if gt $index 0 }} and {{ end }}<a
+            class="stretched-link position-relative">{{ .
+            }}</a>{{ end -}}{{ end -}}
+    </p>
+    <p>
+</div>
