@@ -1,18 +1,12 @@
 .contributors .content,
+.tags .content,
 .blog .content,
 .page .content,
 .error404 .content,
-.docs.list .content,
 .tutorial.list .content,
-.showcase.list .content,
-.categories.list .content,
-.tags.list .content {
+.showcase.list .content {
   padding-top: 1rem;
   padding-bottom: 3rem;
-}
-
-.content img {
-  max-width: 100%;
 }
 
 h1,
@@ -30,27 +24,10 @@ h6,
   margin: 2rem 0 1rem;
 }
 
-.offcanvas-header {
-  border-bottom: 1px solid $gray-300;
-  padding-top: 1.0625rem;
-  padding-bottom: 0.8125rem;
-}
-
-h5.offcanvas-title {
-  margin: 0;
-}
-
-body.docs {
-  padding-top: 0 !important;
-}
-
 @include media-breakpoint-up(md) {
   body {
     font-size: $font-size-md;
-
-    /*
-    padding-top: 4rem !important;
-    */
+    // padding-top: 4rem !important;
   }
 
   h1,
@@ -82,6 +59,13 @@ a:focus {
 a.btn:hover,
 a.btn:focus {
   text-decoration: none;
+  transform: scale(1.03);
+}
+
+button.btn:hover,
+button.btn:focus {
+  text-decoration: none;
+  transform: scale(1.03);
 }
 
 .section {
@@ -99,6 +83,18 @@ a.btn:focus {
   padding-bottom: 1rem;
 }
 
+.overlay-card {
+  box-shadow: 10px 30px 150px rgba(46, 38, 92, 0.25);
+  border-radius: 30px;
+  background-color: white;
+  color: #1B183E;
+  padding: 2rem;
+}
+
+#stats-card {
+  border-radius: 20px;
+}
+
 /*
 .section svg {
   display: inline-block;
@@ -108,11 +104,9 @@ a.btn:focus {
 }
 */
 
-/*
 body {
-  padding-top: 3.5625rem;
+  // padding-top: 3.5625rem;
 }
-*/
 
 .docs-sidebar {
   order: 2;
@@ -131,10 +125,6 @@ body {
       top: 4rem;
       z-index: 1000;
       height: calc(100vh - 4rem);
-    }
-
-    .docs-sidebar-top {
-      top: 0;
     }
   }
 }
@@ -179,10 +169,6 @@ body {
     height: calc(100vh - 4rem);
     overflow-y: auto;
   }
-
-  .docs-toc-top {
-    top: 0;
-  }
 }
 
 .docs-content {
@@ -216,19 +202,13 @@ body {
   text-decoration: none;
 }
 
-#TableOfContents ul,
-#toc ul {
+#TableOfContents ul {
   padding-left: 0;
   list-style: none;
 }
 
-#toc a.active {
-  color: $primary;
-  font-weight: 500;
-}
-
 ::selection {
-  background: rgba(212, 53, 159, 0.2);
+  background: rgba(116, 255, 230, 0.3);
 }
 
 .bg-dots {
@@ -265,24 +245,4 @@ body {
 
 .katex {
   font-size: $font-size-md;
-}
-
-.card-bar {
-  border-top: 4px solid;
-  border-image-source: linear-gradient(90deg, $primary, #8ed6fb 50%, #d32e9d);
-  border-image-slice: 1;
-}
-
-.modal-backdrop {
-  background-color: #fff;
-}
-
-.modal-backdrop.show {
-  opacity: 0.7;
-}
-
-@include media-breakpoint-up(md) {
-  .modal-backdrop.show {
-    opacity: 0;
-  }
 }

@@ -1,0 +1,40 @@
+.card {
+    padding: $spacer * 2;
+    box-shadow: $shadow-standard;
+}
+
+@include media-breakpoint-up(md) {
+    .card {
+      padding: $spacer * 4;
+    }
+}
+
+.card-img {
+    border-radius: 30px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-footer-text {
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: $font-size-xs;
+    color: #8D8B9F;
+}
+
+.level-shadow:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    box-shadow: $shadow-standard;
+    border-radius: $card-border-radius;
+}
+
+.shadow-standard {
+    box-shadow: $shadow-standard;
+}

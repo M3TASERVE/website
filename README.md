@@ -1,38 +1,7 @@
-<p align="center">
-  <a href="https://getdoks.org/">
-    <img alt="Doks" src="https://doks.netlify.app/doks.svg" width="60">
-  </a>
-</p>
 
 <h1 align="center">
   Doks
 </h1>
-
-<h3 align="center">
-  Modern Documentation Theme
-</h3>
-
-<p align="center">
-  Doks is a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.
-</p>
-
-<p align="center">
-  <a href="https://github.com/h-enk/doks/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/h-enk/doks?style=flat-square" alt="GitHub">
-  </a>
-  <a href="https://github.com/h-enk/doks/releases">
-    <img src="https://img.shields.io/github/v/release/h-enk/doks?include_prereleases&style=flat-square"alt="GitHub release (latest SemVer including pre-releases)">
-  </a>
-  <a href="https://www.npmjs.com/package/@hyas/doks">
-    <img src="https://img.shields.io/npm/v/@hyas/doks?style=flat-square" alt="npm (scoped)">
-  </a>
-  <a href="https://github.com/h-enk/doks/actions?query=workflow%3A%22Hyas+CI%22">
-    <img src="https://img.shields.io/github/workflow/status/h-enk/doks/Hyas%20CI/master?style=flat-square" alt="GitHub Workflow Status (branch)">
-  </a>
-  <a href="https://app.netlify.com/sites/doks/deploys">
-    <img src="https://img.shields.io/netlify/8a1009d5-88ac-413e-96ef-3f928674a083?style=flat-square" alt="Netlify">
-  </a>
-</p>
 
 ![Doks — Modern Documentation Theme](https://raw.githubusercontent.com/h-enk/doks/master/images/doks.png)
 
@@ -139,21 +108,17 @@ Doks comes with [commands](https://getdoks.org/docs/prologue/commands/) for comm
 - [Hugo](https://gohugo.io/documentation/)
 - [Doks](https://getdoks.org/)
 
-## Communities
+---
 
-- [Netlify Community](https://community.netlify.com/)
-- [Hugo Forums](https://discourse.gohugo.io/)
-- [Doks Discussions](https://github.com/h-enk/doks/discussions)
+#### Notes
 
-## Sponsors
+Content to modify:
+- layouts = structure
+- content = rawdata
+- static  = assets
+  - css
+  - fonts
+  - images
+  - js
+- archetypes = content template
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
-
-[![OC sponsor 0](https://opencollective.com/doks/tiers/sponsor/0/avatar.svg)](https://opencollective.com/doks/tiers/sponsor/0/website)
-[![OC sponsor 1](https://opencollective.com/doks/tiers/sponsor/1/avatar.svg)](https://opencollective.com/doks/tiers/sponsor/1/website)
-
-## Backers
-
-Support this project by becoming a backer. Your avatar will show up here.
-
-[![Backers](https://opencollective.com/doks/tiers/backer.svg?49741992)](https://opencollective.com/doks)

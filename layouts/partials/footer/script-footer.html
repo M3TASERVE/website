@@ -10,8 +10,6 @@
 {{ $katex := resources.Get "js/vendor/katex/dist/katex.js" -}}
 {{ $katexAutoRender := resources.Get "js/vendor/katex/dist/contrib/auto-render.js" -}}
 
-{{ $mermaid := resources.Get "js/mermaid.js" | js.Build -}}
-
 {{ $app := resources.Get "js/app.js" -}}
 
 {{ $slice := slice $app -}}
@@ -34,14 +32,9 @@
   {{ $slice = $slice | append $instantPage -}}
 {{ end -}}
 
-{{ $showFlexSearch := .Site.Params.options.flexSearch }}
-
-{{ if $showFlexSearch -}}
-  {{ $flexSearch := resources.Get "js/vendor/flexsearch/dist/flexsearch.bundle.js" -}}
+{{ if .Site.Params.options.flexSearch -}}
+  {{ $flexSearch := resources.Get "js/vendor/flexsearch/dist/flexsearch.min.js" -}}
   {{ $slice = $slice | append $flexSearch -}}
-  {{ if and (isset .Site.Params.options "searchsectionsshow") (not (eq .Site.Params.options.searchSectionsShow "ALL")) -}}
-  {{ $showFlexSearch = or (eq (len .Site.Params.options.searchSectionsShow) 0) (in .Site.Params.options.searchSectionsShow .Section) (and .IsHome (in .Site.Params.options.searchSectionsShow "HomePage")) -}}
-  {{ end -}}
 {{ end -}}
 
 {{ if .Site.Params.options.darkMode -}}
@@ -50,25 +43,10 @@
   {{ $slice = $slice | append $darkMode -}}
 {{ end -}}
 
-{{ if and (.Site.Params.alert) (.Site.Params.alertDismissable) -}}
-  {{ $alert := resources.Get "js/alert.js" -}}
-  {{ $alert := $alert | js.Build -}}
-  {{ $slice = $slice | append $alert -}}
-{{ end -}}
-
 {{ if .Site.Params.options.kaTex -}}
   {{ $katexConfig := resources.Get "js/katex.js" -}}
   {{ $katexConfig := $katexConfig | js.Build -}}
   {{ $slice = $slice | append $katexConfig -}}
-{{ end -}}
-
-{{ $scrollLock := resources.Get "js/scroll-lock.js" | js.Build -}}
-{{ $slice = $slice | append $scrollLock -}}
-
-{{ if .Site.Params.options.toTopButton -}}
-  {{ $toTopButton := resources.Get "js/to-top.js" -}}
-  {{ $toTopButton := $toTopButton | js.Build -}}
-  {{ $slice = $slice | append $toTopButton -}}
 {{ end -}}
 
 {{ $js := $slice | resources.Concat "main.js" -}}
@@ -85,10 +63,7 @@
     <script src="{{ $katexAutoRender.RelPermalink }}" onload="renderMathInElement(document.body);" defer></script>
   {{ end -}}
   <script src="{{ $js.RelPermalink }}" defer></script>
-  {{ with .Params.mermaid -}}
-    <script src="{{ $mermaid.RelPermalink }}" defer></script>
-  {{ end -}}
-  {{ if $showFlexSearch -}}
+  {{ if .Site.Params.options.flexSearch -}}
     <script src="{{ $index.RelPermalink }}" defer></script>
   {{ end -}}
 {{ else -}}
@@ -98,7 +73,6 @@
   {{ $highlight := $highlight | minify | fingerprint "sha512" -}}
   {{ $katex := $katex | minify | fingerprint "sha512" -}}
   {{ $katexAutoRender := $katexAutoRender | minify | fingerprint "sha512" -}}
-  {{ $mermaid := $mermaid | minify | fingerprint "sha512" -}}
   {{ if .Site.Params.options.bootStrapJs -}}
     <script src="{{ $bs.RelPermalink }}" integrity="{{ $bs.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
@@ -110,10 +84,16 @@
     <script src="{{ $katexAutoRender.RelPermalink }}" integrity="{{ $katexAutoRender.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous" defer></script>
-  {{ with .Params.mermaid -}}
-    <script src="{{ $mermaid.RelPermalink }}" integrity="{{ $mermaid.Data.Integrity }}" crossorigin="anonymous" defer></script>
-  {{ end -}}
-  {{ if $showFlexSearch -}}
-    <script src="{{ $index.Permalink }}" integrity="{{ $index.Data.Integrity }}" crossorigin="anonymous" defer></script>
+  {{ if .Site.Params.options.flexSearch -}}
+    <script src="{{ $index.RelPermalink }}" integrity="{{ $index.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
 {{ end -}}
+
+<!-- TODO: bundle into page-specific javascript -->
+{{ range .Page.Resources.Match "*.script.js" }}
+<script src="{{ .RelPermalink }}" defer></script>
+{{ end }}
+
+<script src="/js/vendor/supabase.js"></script>
+<script src="/js/vendor/alpine.js" defer></script>
+<script src="/js/auth.js"></script>

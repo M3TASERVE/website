@@ -9,6 +9,7 @@
 
 .anchor {
   visibility: hidden;
+  padding-left: 0.5rem;
 }
 
 h1:hover a,
@@ -23,29 +24,13 @@ h4:hover a {
   margin-top: 2.25rem;
 }
 
-.page-footer-meta {
+.edit-page {
   margin-top: 3rem;
+  font-size: $font-size-base;
 }
 
-.edit-page,
-.last-modified {
-  font-size: $font-size-sm;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-}
-
-@include media-breakpoint-up(md) {
-  .edit-page,
-  .last-modified {
-    font-size: $font-size-base;
-    margin-top: 0.75rem;
-    margin-bottom: 0.25rem;
-  }
-}
-
-.edit-page svg,
-.last-modified svg {
-  margin-right: 0.25rem;
+.edit-page svg {
+  margin-right: 0.5rem;
   margin-bottom: 0.25rem;
 }
 
@@ -59,6 +44,20 @@ p.meta {
   font-size: $font-size-base;
 }
 
-.page-link:hover {
-  text-decoration: none;
+.callout {
+    border: 1px solid $gray-500;
+    border-left: 5px solid $primary;
+    background: $gray-100;
+    @extend .rounded-2;
+    padding: 1rem;
+}
+
+// use full discs for all lists (primary and sublists) to increase the readability
+ul {
+  list-style: disc;
+}
+
+// make ordered list markers (1., 2.,...) bold to increase the readability
+ol li::marker {
+  font-weight: bold;
 }

@@ -1,0 +1,90 @@
+
+{{ define "main" }} 
+
+{{ partial "heroes/base.html" (dict "Title" .Title "HeroIcon" "cloud") }}
+
+<section class="section container mt-n7" x-data="user()">
+  <div class="overlay-card mb-5" style="padding-top: 10px;">
+    <div class="row align-items-center gy-2">
+
+      <ul class="nav nav-pills nav-fill" role="tablist" style="z-index: 1; ">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Sign In</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sign Up</button>
+        </li>
+      </ul>
+
+        <div class="col-12 tab-content">
+          
+          <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <form style="margin-top: 10px;">
+
+            <div class="row form-group gy-1 gy-md-3 mb-5">
+              <div class="col-12">
+                <label class="font-bold text-grey-darker block mb-2">Email</label>
+                <input type="email" class="contact-textbox" placeholder="Your email" required x-model="form.email"/>
+              </div>
+            </div>
+            
+            <div class="row form-group gy-1 gy-md-3 mb-5">
+              <div class="col-12">
+                <label class="font-bold text-grey-darker block mb-2">Password</label>
+                <input type="password" class="contact-textbox" placeholder="Your password" name="password" required x-model="form.password"/>
+              </div>
+            </div>
+            
+            <div class="row form-group gy-1 gy-md-3">
+              <div class="flex flex-col gap-2 mb-5">
+                <a class="btn btn-primary btn-tertiary" @click="signin()"><i class="bi bi-person"></i> SIGN IN</a>
+              </div>
+              
+              <div class="mt-2 text-sm leading-5">
+                <a @click="reset()" href="#" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                  Forgot your password?                  
+                </a>
+              </div>              
+            </div>
+
+          </form>
+          </div>
+          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <form>
+
+            <div class="row form-group gy-1 gy-md-3 mb-5">
+              <div class="col-12">
+                <label class="font-bold text-grey-darker block mb-2">Email</label>
+                <input type="email" class="contact-textbox" placeholder="Your email" required x-model="form.email"/>
+              </div>
+            </div>
+            
+            <div class="row form-group gy-1 gy-md-3 mb-5">
+              <div class="col-12">
+                <label class="font-bold text-grey-darker block mb-2">Password</label>
+                <input type="password" class="contact-textbox" placeholder="Your password" name="password" required x-model="form.password"/>
+              </div>
+            </div>
+
+            <div class="row form-group gy-1 gy-md-3 mb-5">
+              <div class="col-12">
+                <label class="font-bold text-grey-darker block mb-2">Password</label>
+                <input type="password" class="contact-textbox" placeholder="Your password" name="password" required x-model="form.password2"/>
+              </div>
+            </div>
+            
+            <div class="row form-group gy-1 gy-md-3">
+              <div class="flex flex-col gap-2 mb-5">
+                <a class="btn btn-primary btn-tertiary" @click="signup()"><i class="bi bi-person"></i> SIGN UP</a>
+              </div>                 
+            </div>
+
+          </form>
+          </div>
+
+        </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}
