@@ -1,3 +1,5 @@
-import supabase from '@supabase/dist/umd/supabase.js'
+import { 
+    createClient, SupabaseClient
+   } from "@supabase/supabase-js";
 
-window.supabase = supabase;
+window.supabase = { createClient, SupabaseClient };

@@ -1,3 +1,3 @@
-import alpine from 'alpinejs/dist/cdn.min.js'
+import alpine from 'alpinejs'
 
 window.alpine = alpine;
