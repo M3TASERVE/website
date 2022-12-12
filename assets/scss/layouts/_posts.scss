@@ -1,4 +1,3 @@
-.home .card,
 .contributors.list .card,
 .faq.list .card,
 .tags.list .card,
@@ -9,7 +8,6 @@
   transition: transform 0.3s;
 }
 
-.home .card:hover,
 .contributors.list .card:hover,
 .tags.list .card,
 .faq.list .card:hover,
@@ -18,7 +16,6 @@
   transform: scale(1.025);
 }
 
-.home .card-body,
 .contributors.list .card-body,
 .tags.list .card,
 .blog.list .card-body,
