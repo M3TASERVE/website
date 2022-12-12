@@ -232,3 +232,39 @@
        url('fonts/vendor/exo/exo-v19-latin-900italic.ttf') format('truetype'), /* Safari, Android, iOS */
        url('fonts/vendor/exo/exo-v19-latin-900italic.svg#Exo') format('svg'); /* Legacy iOS */
 }
+
+/* poppins-medium normal */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: normal;
+  src: local(''),
+       url('fonts/vendor/poppins/Poppins-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+/* poppins-medium italic */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: normal;
+  src: local(''),
+       url('fonts/vendor/poppins/Poppins-MediumItalic.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+/* poppins-bold normal */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: bold;
+  src: local(''),
+       url('fonts/vendor/poppins/Poppins-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+/* poppins-bold italic */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: bold;
+  src: local(''),
+       url('fonts/vendor/poppins/Poppins-BoldItalic.ttf') format('truetype'), /* Safari, Android, iOS */
+}
