@@ -5,8 +5,8 @@
 {{ $bs := $bs | js.Build -}}
 
 {{ $supabase := resources.Get "js/supabase.js" -}}
-{{ $api_url := .Site.Params.SupabaseUrl -}}
-{{ $api_key := .Site.Params.SupabaseKey -}}
+{{ $api_url := .Site.Params.supabaseUrl -}}
+{{ $api_key := .Site.Params.supabaseKey -}}
 {{ $opts := dict "params" (dict "APP_SUPABASE_URL" $api_url "APP_SUPABASE_KEY" $api_key) }}
 {{ $supabase := $supabase | js.Build $opts -}}
 

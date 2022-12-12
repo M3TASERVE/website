@@ -92,5 +92,5 @@ rel  = "sitemap"
     target = "assets/js/vendor/katex"
 
 [Params]
-  SupabaseUrl=""
-  SupabaseKey=""
+  supabaseUrl=""
+  supabaseKey=""
