@@ -20,6 +20,14 @@
     {{ partial "header/header.html" . }}
     {{ block "main" . }}{{ end }}
     {{ partial "footer/script-footer.html" . }}
+    {{ else if eq .Type "docs" . }}
+    {{ partial "header/header.html" . }}
+    <div class="wrap container-fluid" role="document">
+      <div class="content">
+        {{ block "main" . }}{{ end }}
+      </div>
+    </div>
+    {{ partial "footer/script-footer.html" . }}
     {{ else }}
     {{ partial "header/header.html" . }}
     {{ block "main" . }}{{ end }}

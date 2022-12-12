@@ -1,11 +1,11 @@
 .card {
-    padding: $spacer * 2;
+    padding: $card-spacer * 2;
     box-shadow: $shadow-standard;
 }
 
 @include media-breakpoint-up(md) {
     .card {
-      padding: $spacer * 4;
+      padding: $card-spacer * 4;
     }
 }
 

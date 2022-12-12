@@ -1,20 +1,21 @@
 
 {{ define "main" }} 
 
-{{ partial "heroes/base.html" (dict "Title" .Title "HeroIcon" "cloud") }}
-
-<section class="section container mt-n7" x-data="user()">
-  <div class="overlay-card mb-5" style="padding-top: 10px;">
+<section class="section section-sm" x-data="user()">
+<div class="container mt-2 mb-2 d-flex justify-content-center">
+  
+    <div class="overlay-card col-6 mt-6">
     <div class="row align-items-center gy-2">
-
-      <ul class="nav nav-pills nav-fill" role="tablist" style="z-index: 1; ">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Sign In</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sign Up</button>
-        </li>
-      </ul>
+        <!--
+        <ul class="nav nav-pills nav-fill" role="tablist" style="z-index: 1; ">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Sign In</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sign Up</button>
+          </li>
+        </ul>
+        -->
 
         <div class="col-12 tab-content">
           
@@ -37,18 +38,27 @@
             
             <div class="row form-group gy-1 gy-md-3">
               <div class="mt-2 text-sm leading-5">
+                <a class="btn btn-primary btn-tertiary d-flex" @click="signin()"><i class="bi bi-person me-2"></i> Sign In</a>
+              </div>
+            </div>
+
+            <div class="row form-group gap-2 mt-4">
+              <div class="mt-2 text-sm leading-5">
                 <a @click="reset()" href="#" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                   Forgot your password?                  
                 </a>
-              </div>              
-
-              <div class="flex flex-col gap-2 mb-5">
-                <a class="btn btn-primary btn-tertiary float-end" @click="signin()"><i class="bi bi-person"></i> SIGN IN</a>
+              </div>
+              <div class="mt-2 text-sm leading-5">
+                <a @click="signup()" href="#" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                  No account ? <i class="bi bi-person ms-2 me-2"></i> Sign Up
+                </a>             
               </div>
             </div>
 
           </form>
           </div>
+
+          <!--
           <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <form>
 
@@ -69,15 +79,17 @@
             
             <div class="row form-group gy-1 gy-md-3">
               <div class="flex flex-col gap-2 mb-5">
-                <a class="btn btn-primary btn-tertiary float-end" @click="signup()"><i class="bi bi-person"></i> SIGN UP</a>
+                
               </div>                 
             </div>
 
           </form>
           </div>
+          -->
 
         </div>
-    </div>
+        
+  </div>
   </div>
 
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -87,12 +99,11 @@
         <small></small>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div class="toast-body" x-text="msg">
-      </div>
+      <div class="toast-body" x-text="msg"></div>
     </div>
   </div>
   
-
+</div>
 </section>
 
 {{ end }}

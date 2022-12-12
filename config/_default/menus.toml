@@ -1,81 +1,35 @@
 [[main]]
-  name = "SOLUTIONS"
-  url = "/solutions/"
+  name = "Courses"
+  url = "/docs/"
+  weight = 10
+
+[[main]]
+  name = "Process"
+  url = "/process/"
+  weight = 20
+
+[[main]]
+  name = "Bootcamp"
+  url = "/bootcamp/"
+  weight = 30
+
+[[main]]
+  name = "FAQ"
+  url  = "/faq"
   weight = 5
+  parent = "Bootcamp"
 
 [[main]]
-  name = "PRICING"
-  url = "/pricing/"
-  weight = 7
-
-[[main]]
-  name = "COMPANY"
-  url = "/company/"
+  name = "CONTACTS"
+  url  = "/contact"
   weight = 10
-
-[[main]]
-  name = "COMMUNITY"
-  url = "/community/"
-  weight = 20
-
-[[main]]
-  name = "BLOG"
-  url = "/blog/"
-  weight = 30
-
-[[main]]
-  name = "DOCS"
-  url = "https://docs.localstack.cloud"
-  weight = 40
-
-[[main]]
-  name = "CLOUD EMULATION"
-  url = "/solutions/cloud-emulation"
-  weight = 10
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "TEAM COLLABORATION"
-  url = "/solutions/team-collaboration"
-  weight = 20
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "ENTERPRISE INTEGRATION"
-  url = "/solutions/enterprise-integration"
-  weight = 30
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "ECOSYSTEM"
-  url = "/solutions/ecosystem"
-  weight = 40
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "STAY INFORMED"
-  url  = "/community/stay-informed"
-  weight = 10
-  parent = "COMMUNITY"
-
-[[main]]
-  name = "GET INVOLVED"
-  url  = "/community/get-involved"
-  weight = 15
-  parent = "COMMUNITY"
-
+  parent = "Bootcamp"
+  
 [[main]]
   name = "ABOUT US"
-  url  = "/company"
+  url  = "/about"
   weight = 15
-  parent = "COMPANY"
-
-[[main]]
-  name = "CAREERS"
-  url  = "/careers"
-  weight = 15
-  parent = "COMPANY"
-
+  parent = "Bootcamp"
 
 [[social]]
   name = "GitHub"
@@ -83,7 +37,6 @@
   url = "https://github.com/localstack"
   post = "v0.1.0"
   weight = 20
-
 
 [[social]]
   name = "Twitter"
