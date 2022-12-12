@@ -1,29 +1,35 @@
 [[main]]
-  name = "DOCS"
+  name = "Courses"
   url = "/docs/"
   weight = 10
 
 [[main]]
-  name = "PRICING"
-  url = "/pricing/"
+  name = "Process"
+  url = "/process/"
   weight = 20
 
 [[main]]
-  name = "COMPANY"
-  url = "/company/"
+  name = "Bootcamp"
+  url = "/bootcamp/"
   weight = 30
 
 [[main]]
-  name = "ABOUT US"
-  url  = "/company"
-  weight = 15
-  parent = "COMPANY"
+  name = "FAQ"
+  url  = "/faq"
+  weight = 5
+  parent = "Bootcamp"
 
 [[main]]
-  name = "CAREERS"
-  url  = "/careers"
+  name = "CONTACTS"
+  url  = "/contact"
+  weight = 10
+  parent = "Bootcamp"
+  
+[[main]]
+  name = "ABOUT US"
+  url  = "/about"
   weight = 15
-  parent = "COMPANY"
+  parent = "Bootcamp"
 
 [[social]]
   name = "GitHub"
@@ -31,7 +37,6 @@
   url = "https://github.com/localstack"
   post = "v0.1.0"
   weight = 20
-
 
 [[social]]
   name = "Twitter"

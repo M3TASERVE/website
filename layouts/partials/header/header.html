@@ -11,25 +11,29 @@
 
       <div class="flex-grow-1 order-2 d-lg-none"></div>
 
-      {{ if .Site.Params.options.darkMode -}}
-      <button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
-        <span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
-        <span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
-      </button>
-      {{ end -}}
-
-      <ul class="navbar-nav social-nav d-none d-sm-flex order-3 order-lg-4" x-data="user()">
+      <ul class="navbar-nav social-nav d-none d-sm-flex order-3 order-lg-4">
         {{ range .Site.Menus.social -}}
         <li class="nav-item">
           <a class="nav-link" target="_blank" href="{{ .URL | relURL }}">{{ .Pre | safeHTML }}<span class="visually-hidden">{{ .Name | safeHTML }}</span></a>
         </li>
         {{ end -}}
-        <li class="nav-item ms-2">
+        {{ if .Site.Params.options.darkMode -}}
+        <li class="nav-item ms-4">
+          <button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+            <span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+            <span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+          </button>
+        </li>
+        {{ end -}}
+      </ul>
+
+      <div class="navbar-nav d-none d-sm-flex order-5 order-lg-6 ms-4" x-data="user()">
+        <div class="nav-item ms-2">
           <template x-if="!logged">
           <a class="btn btn-primary btn-tertiary" type="link" href="/login"><i class="bi bi-person"></i> SIGN IN</a>
           </template>
-        </li>
-        <li class="nav-item ms-2">
+        </div>
+        <div class="nav-item ms-2">
           <template x-if="logged">
           <div class="dropdown">
             <a class="btn btn-primary btn-tertiary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px; width: 40px; height: 40px; padding: 10px 2px 0px 2px;">
@@ -41,23 +45,18 @@
             </ul>
           </div>
           </template>
-        </li>
-      </ul>
-
-      <div class="collapse navbar-collapse order-4 order-lg-3 flex-grow-0" id="collapse-content">
+        </div>
+      </div>
+      
+      
+      <div class="collapse navbar-collapse order-4 order-lg-3" id="collapse-content">
         <ul class="navbar-nav main-nav me-auto mt-4 mt-sm-0 gap-xl-4 d-flex justify-content-between flex-column flex-sm-row">
           {{- $current := . -}}
           {{ range .Site.Menus.main -}}
             {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) -}}
             {{- $active = or $active (eq .Name $current.Title) -}}
-            {{- $active = or $active (and (eq .Name "SOLUTIONS") (eq $current.Section "solutions")) -}}
-            {{- $active = or $active (and (eq .Name "COMMUNITY") (eq $current.Section "community")) -}}
             {{- $active = or $active (and (eq .Name "PRICING") (eq $current.Section "pricing")) -}}
-            {{- $active = or $active (and (eq .Name "COMPANY") (eq $current.Section "company")) -}}
-            <!-- workaround for navbar highlighting careers section -->
-            {{- $active = or $active (and (eq .Name "COMPANY") (eq $current.Section "careers")) -}}
-            <!-- -->
-            {{- $active = or $active (and (eq .Name "BLOG") (eq $current.Section "blog" "authors")) -}}
+            {{- $active = or $active (and (eq .Name "BOOTCAMP") (eq $current.Section "bootcamp")) -}}
             <li class="nav-item ms-0{{ if $active }} active{{ end }}{{ if .HasChildren }} dropdown{{ end }}">
               {{ if .HasChildren }} 
                 <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,19 +71,10 @@
                 <a class="nav-link" style="white-space: nowrap" href="{{ .URL | relURL }}">{{ .Name | safeHTML }}</a>
               {{ end }}
             </li>
-          {{ end -}}
-          <li class="nav-item d-flex d-sm-none justify-content-between">
-            <div class="d-flex gap-4">
-          {{ range .Site.Menus.social -}}
-            <a class="nav-link" target="_blank" href="{{ .URL | relURL }}">{{ .Pre | safeHTML }}<span class="visually-hidden">{{ .Name | safeHTML }}</span></a>
-            {{ end -}}
-          </div>
-            <a class="btn btn-primary btn-tertiary" type="link" href="https://app.localstack.cloud"><i class="bi bi-person"></i> SIGN UP</a>
-          </li>
-          <li class="nav-item ms-2 d-flex d-sm-none">
-          </li>
+          {{ end -}}          
         </ul>
       </div>
+      
     </div>
   </div>
   <!-- disabled for now, until we have a better/reactive version of this -->
