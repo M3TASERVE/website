@@ -1,5 +1,7 @@
-import { 
-    createClient, SupabaseClient
-   } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
+import * as params from '@params';
 
-window.supabase = { createClient, SupabaseClient };
+window.createSupabase = () => {
+    return createClient(params.APP_SUPABASE_URL, params.APP_SUPABASE_KEY);
+};
+
