@@ -166,8 +166,8 @@
       <stop offset="1" stop-color="#EFFFF3"/>
     </linearGradient>
     <linearGradient id="paint14_linear_771_4524" x1="498.067" y1="414" x2="549.94" y2="379.314" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#63ECD3"/>
-      <stop offset="1" stop-color="#835AF7"/>
+      <stop stop-color="#E126C3"/>
+      <stop offset="1" stop-color="#E126C3"/>
     </linearGradient>
   </defs>
   <g filter="url(#filter0_d_771_4524)">

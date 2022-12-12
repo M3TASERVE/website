@@ -13,7 +13,7 @@ $gray-900: #212529;
 $black:    #000;
 
 $yellow:   #ffe000;
-$black:    #1d2d35;
+$black:    #000;
 $beige:    #fbf7f0;
 // $red:      #e55235;
 $purple:   #5d2f86;
@@ -28,7 +28,13 @@ $blue-dark:  #4755AC;
 
 $dark-purple: #39227A;
 
-$primary: $dark-purple;
+// m3taserve
+$m3ta-fuchsia:   #E126C3;
+$m3ta-dark-grey:   #1B1B1B;
+$m3ta-light-grey:   #D9D9D9;
+
+$primary: $black;
+$secondary: $m3ta-fuchsia;
 
 // Options
 //
@@ -64,7 +70,7 @@ $navbar-light-toggler-icon-bg: none;
 // Settings for the `<body>` element.
 
 $body-bg:                   #fbfbfb;
-$body-color:                #1B183E;
+$body-color:                $black;
 
 // Links
 //
