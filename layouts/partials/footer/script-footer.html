@@ -91,7 +91,8 @@
   {{ $katex := $katex | minify | fingerprint "sha512" -}}
   {{ $katexAutoRender := $katexAutoRender | minify | fingerprint "sha512" -}}
   {{ $supabase := $supabase | minify | fingerprint "sha512" -}}
-  {{ $alpine := $alpine | minify | fingerprint "sha512" -}}  
+  {{ $alpine := $alpine | minify | fingerprint "sha512" -}}
+  {{ $auth := $auth | minify | fingerprint "sha512" -}}
   {{ if .Site.Params.options.bootStrapJs -}}
     <script src="{{ $bs.RelPermalink }}" integrity="{{ $bs.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
