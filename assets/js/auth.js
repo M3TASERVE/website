@@ -5,15 +5,29 @@ var supabase = createSupabase();
 var infos = supabase.auth.user();
 console.log(JSON.stringify(infos));
 
+var showToast = (self, message) => {
+    self.msg = message; 
+    var toast = new bootstrap.Toast(document.querySelector(".toast"));
+    toast.show();
+}
+
+var handleResponse = (self, response) => {
+    if (response.error) { 
+        console.log(response.error.message); 
+        showToast(self, response.error.message);
+    } else { 
+        console.log(response); window.location="/"; 
+    }
+}
+var handleError = (self, err) => {
+    console.log(err);
+    showToast(self, err.response.text);
+}
+
 Alpine.data('user', () => ({
     identity: infos ? infos.identities[0].identity_data : { email: "", sub: "" },
     logged: infos != null,
-    msg: "Hello, world!",
-    showToast(message) {
-        this.msg = message; 
-        var toast = new bootstrap.Toast(document.querySelector(".toast"));
-        toast.show();
-    },
+    msg: "",
     form: {
         email: '',
         password: '',
@@ -22,27 +36,27 @@ Alpine.data('user', () => ({
         var self = this;
         supabase.auth
         .signIn({ email: self.form.email, password: self.form.password })
-        .then((response) => { if (response.error) { console.log(response.error.message); this.showToast(response.error.message); } else { console.log(response); window.location="/"; } })
-        .catch((err) => { console.log(err); this.showToast(err.response.text); });
+        .then((response) => { handleResponse(this, response); })
+        .catch((err) => { handleError(this, err); });
     },
     signup() {
         var self = this;
         supabase.auth
         .signUp({ email: self.form.email, password: self.form.password })
-        .then((response) => { response.error ? console.log(response.error.message) : console.log(response); })
-        .catch((err) => { console.log(err.response.text); })
+        .then((response) => { handleResponse(this, response); })
+        .catch((err) => { handleError(this, err); });
     },
     signout() {
         supabase.auth.signOut()
-        .then((response) => { if (response.error) { console.log(response.error.message); } else { console.log(response); window.location="/"; } })
-        .catch((err) => { console.log(err.response.text); })
+        .then((response) => { handleResponse(this, response); })
+        .catch((err) => { handleError(this, err); });
     },
     reset() {
         var self = this;
-        supabase.auth
+        supabase.auth.api
         .resetPasswordForEmail({ email: self.form.email })
-        .then((response) => { response.error ? console.log(response.error.message) : console.log(response); })
-        .catch((err) => { console.log(err.response.text); })
+        .then((response) => { handleResponse(this, response); })
+        .catch((err) => { handleError(this, err); });
     }
 }))
 
