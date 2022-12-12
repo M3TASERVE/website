@@ -1,11 +1,18 @@
-var supabase = createClient(process.env.APP_SUPABASE_URL, process.env.APP_SUPABASE_KEY);
+import Alpine from `alpinejs`
+
+var supabase = createSupabase();
 
 var infos = supabase.auth.user();
 console.log(JSON.stringify(infos));
 
-function user() {
-    return {
+Alpine.data('user', () => ({
     logged: infos != null,
+    msg: "Hello, world!",
+    showToast(message) {
+        this.msg = message; 
+        var toast = new bootstrap.Toast(document.querySelector(".toast"));
+        toast.show();
+    },
     form: {
         email: '',
         password: '',
@@ -14,8 +21,8 @@ function user() {
         var self = this;
         supabase.auth
         .signIn({ email: self.form.email, password: self.form.password })
-        .then((response) => { if (response.error) { console.log(response.error.message); } else { console.log(response); window.location="/"; } })
-        .catch((err) => { console.log(err.response.text); })
+        .then((response) => { if (response.error) { console.log(response.error.message); this.showToast(response.error.message); } else { console.log(response); window.location="/"; } })
+        .catch((err) => { console.log(err); this.showToast(err.response.text); });
     },
     signup() {
         var self = this;
@@ -35,6 +42,7 @@ function user() {
         .resetPasswordForEmail({ email: self.form.email })
         .then((response) => { response.error ? console.log(response.error.message) : console.log(response); })
         .catch((err) => { console.log(err.response.text); })
-    }    
     }
-}
+}))
+
+Alpine.start()

@@ -36,15 +36,15 @@
             </div>
             
             <div class="row form-group gy-1 gy-md-3">
-              <div class="flex flex-col gap-2 mb-5">
-                <a class="btn btn-primary btn-tertiary" @click="signin()"><i class="bi bi-person"></i> SIGN IN</a>
-              </div>
-              
               <div class="mt-2 text-sm leading-5">
                 <a @click="reset()" href="#" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                   Forgot your password?                  
                 </a>
               </div>              
+
+              <div class="flex flex-col gap-2 mb-5">
+                <a class="btn btn-primary btn-tertiary float-end" @click="signin()"><i class="bi bi-person"></i> SIGN IN</a>
+              </div>
             </div>
 
           </form>
@@ -63,19 +63,13 @@
               <div class="col-12">
                 <label class="font-bold text-grey-darker block mb-2">Password</label>
                 <input type="password" class="contact-textbox" placeholder="Your password" name="password" required x-model="form.password"/>
-              </div>
-            </div>
-
-            <div class="row form-group gy-1 gy-md-3 mb-5">
-              <div class="col-12">
-                <label class="font-bold text-grey-darker block mb-2">Password</label>
                 <input type="password" class="contact-textbox" placeholder="Your password" name="password" required x-model="form.password2"/>
               </div>
             </div>
             
             <div class="row form-group gy-1 gy-md-3">
               <div class="flex flex-col gap-2 mb-5">
-                <a class="btn btn-primary btn-tertiary" @click="signup()"><i class="bi bi-person"></i> SIGN UP</a>
+                <a class="btn btn-primary btn-tertiary float-end" @click="signup()"><i class="bi bi-person"></i> SIGN UP</a>
               </div>                 
             </div>
 
@@ -85,6 +79,20 @@
         </div>
     </div>
   </div>
+
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Error</strong>
+        <small></small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" x-text="msg">
+      </div>
+    </div>
+  </div>
+  
+
 </section>
 
 {{ end }}
