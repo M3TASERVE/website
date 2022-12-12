@@ -16,6 +16,10 @@
     {{ if eq .Type "login" . }}
     {{ block "main" . }}{{ end }}
     {{ partial "footer/script-footer.html" . }}
+    {{ else if eq .Type "profile" . }}
+    {{ partial "header/header.html" . }}
+    {{ block "main" . }}{{ end }}
+    {{ partial "footer/script-footer.html" . }}
     {{ else }}
     {{ partial "header/header.html" . }}
     {{ block "main" . }}{{ end }}
