@@ -46,15 +46,15 @@
 </linearGradient>
 <linearGradient id="paint1_linear_913_6311" x1="37.1026" y1="27.8017" x2="47.7126" y2="88.3308" gradientUnits="userSpaceOnUse">
 <stop stop-color="#63F2D8"/>
-<stop offset="1" stop-color="#835AF7"/>
+<stop offset="1" stop-color="#E126C3"/>
 </linearGradient>
 <linearGradient id="paint2_linear_913_6311" x1="76.7086" y1="42.654" x2="65.4786" y2="96.2029" gradientUnits="userSpaceOnUse">
 <stop stop-color="#63F2D8"/>
-<stop offset="1" stop-color="#835AF7"/>
+<stop offset="1" stop-color="#E126C3"/>
 </linearGradient>
 <linearGradient id="paint3_linear_913_6311" x1="52.1198" y1="72.6505" x2="57.665" y2="116.078" gradientUnits="userSpaceOnUse">
 <stop stop-color="#63F2D8"/>
-<stop offset="1" stop-color="#835AF7"/>
+<stop offset="1" stop-color="#E126C3"/>
 </linearGradient>
 </defs>
 </svg>
