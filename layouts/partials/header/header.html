@@ -24,19 +24,23 @@
           <a class="nav-link" target="_blank" href="{{ .URL | relURL }}">{{ .Pre | safeHTML }}<span class="visually-hidden">{{ .Name | safeHTML }}</span></a>
         </li>
         {{ end -}}
-        <li class="nav-item ms-2" x-show="!logged">
+        <li class="nav-item ms-2">
+          <template x-if="!logged">
           <a class="btn btn-primary btn-tertiary" type="link" href="/login"><i class="bi bi-person"></i> SIGN IN</a>
+          </template>
         </li>
-        <li class="nav-item ms-2" x-show="logged">
+        <li class="nav-item ms-2">
+          <template x-if="logged">
           <div class="dropdown">
             <a class="btn btn-primary btn-tertiary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px; width: 40px; height: 40px; padding: 10px 2px 0px 2px;">
               <i class="bi bi-person"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
               <li><a class="dropdown-item" href="#" @click="signout()">Logout</a></li>
             </ul>
           </div>
+          </template>
         </li>
       </ul>
 

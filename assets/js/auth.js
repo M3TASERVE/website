@@ -6,6 +6,7 @@ var infos = supabase.auth.user();
 console.log(JSON.stringify(infos));
 
 Alpine.data('user', () => ({
+    identity: infos ? infos.identities[0].identity_data : { email: "", sub: "" },
     logged: infos != null,
     msg: "Hello, world!",
     showToast(message) {
