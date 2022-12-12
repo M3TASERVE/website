@@ -27,6 +27,7 @@ var handleError = (self, err) => {
 Alpine.data('user', () => ({
     identity: infos ? infos.identities[0].identity_data : { email: "", sub: "" },
     logged: infos != null,
+    results: [],
     msg: "",
     form: {
         email: '',
@@ -56,6 +57,34 @@ Alpine.data('user', () => ({
         supabase.auth.api
         .resetPasswordForEmail({ email: self.form.email })
         .then((response) => { handleResponse(this, response); })
+        .catch((err) => { handleError(this, err); });
+    },
+    publish() {
+        var self = this;
+        supabase.from('results').insert({ content: "test", created_by: self.identity.sub }).single()
+        .then((response) => {
+            if (response.error) { 
+                console.log(response.error.message); 
+                showToast(self, response.error.message);
+            } else { 
+                console.log(response);
+            }
+        })
+        .catch((err) => { handleError(this, err); });
+    },
+    retrieve() {
+        var self = this;
+        supabase.from('results').select('*').order('id').filter('created_by', 'eq', self.identity.sub)
+        .then((response) => {
+            if (response.error) { 
+                console.log(response.error.message); 
+                showToast(self, response.error.message);
+            } else { 
+                console.log(response);
+                self.results.splice(0, self.results.length);
+                response.data.forEach(x => { self.results.push(JSON.stringify(x)); });
+            }
+        })
         .catch((err) => { handleError(this, err); });
     }
 }))

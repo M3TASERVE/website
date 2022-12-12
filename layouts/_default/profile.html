@@ -4,13 +4,16 @@
 {{ partial "heroes/base.html" (dict "Title" .Title "HeroIcon" "cloud") }}
 
 <section class="section container mt-n7" x-data="user()">
-  <div class="overlay-card mb-5" style="padding-top: 10px;">
-    <div class="row align-items-center gy-2">
+  <div class="overlay-card" style="padding-top: 10px;">
+    <div class="row align-items-center">
 
       <div class="row form-group gy-1 gy-md-3 mb-5">
         <div class="col-6">
           <template x-if="logged">
-            <label class="font-bold text-grey-darker block mb-2 float-start">Email </label><div x-text="identity.email" class="text float-end"></div>
+            <div>
+              <label class="font-bold text-grey-darker block mb-2 float-start">Email </label>
+              <span class="text float-end" x-text="identity.email"></span>
+            </div>
           </template>
           <template x-if="!logged">
             <div>User must be logged</div>
