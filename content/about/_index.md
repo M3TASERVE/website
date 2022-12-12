@@ -1,11 +1,11 @@
 ---
-title: "Careers"
-description: "Careers at LocalStack"
+title: "About"
+description: "About"
 date: 2021-04-29T13:40:06+02:00
 lastmod: 2021-04-29T13:40:06+02:00
 draft: false
 images: []
-aliases: ["/jobs/"]
+aliases: ["/about/"]
 ---
 
 <div class="blog-tags d-flex flex-wrap gap-3">
