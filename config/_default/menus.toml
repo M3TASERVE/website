@@ -1,68 +1,17 @@
 [[main]]
-  name = "SOLUTIONS"
-  url = "/solutions/"
-  weight = 5
+  name = "DOCS"
+  url = "/docs/"
+  weight = 10
 
 [[main]]
   name = "PRICING"
   url = "/pricing/"
-  weight = 7
+  weight = 20
 
 [[main]]
   name = "COMPANY"
   url = "/company/"
-  weight = 10
-
-[[main]]
-  name = "COMMUNITY"
-  url = "/community/"
-  weight = 20
-
-[[main]]
-  name = "BLOG"
-  url = "/blog/"
   weight = 30
-
-[[main]]
-  name = "DOCS"
-  url = "https://docs.localstack.cloud"
-  weight = 40
-
-[[main]]
-  name = "CLOUD EMULATION"
-  url = "/solutions/cloud-emulation"
-  weight = 10
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "TEAM COLLABORATION"
-  url = "/solutions/team-collaboration"
-  weight = 20
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "ENTERPRISE INTEGRATION"
-  url = "/solutions/enterprise-integration"
-  weight = 30
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "ECOSYSTEM"
-  url = "/solutions/ecosystem"
-  weight = 40
-  parent = "SOLUTIONS"
-
-[[main]]
-  name = "STAY INFORMED"
-  url  = "/community/stay-informed"
-  weight = 10
-  parent = "COMMUNITY"
-
-[[main]]
-  name = "GET INVOLVED"
-  url  = "/community/get-involved"
-  weight = 15
-  parent = "COMMUNITY"
 
 [[main]]
   name = "ABOUT US"
@@ -75,7 +24,6 @@
   url  = "/careers"
   weight = 15
   parent = "COMPANY"
-
 
 [[social]]
   name = "GitHub"
