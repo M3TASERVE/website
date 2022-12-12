@@ -55,7 +55,8 @@ tr.no-border-bottom td {
 }
 
 .customer-logo {
-  max-height: 65px; 
+  max-height: 65px;
+  max-width: 180px;
   filter: grayscale(100%); 
   opacity: 50%;
 }
