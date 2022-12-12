@@ -24,5 +24,6 @@ resources
 .hugo_build.lock
 
 .env.local
+static/js/auth.js
 
 

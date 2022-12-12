@@ -5,16 +5,16 @@
 {{ $bs := $bs | js.Build -}}
 
 {{ $supabase := resources.Get "js/supabase.js" -}}
-{{ $supabase := $supabase | js.Build -}}
+{{ $api_url := os.Getenv "HUGO_APP_SUPABASE_URL" -}}
+{{ $api_key := os.Getenv "HUGO_APP_SUPABASE_KEY" -}}
+{{ $opts := dict "params" (dict "APP_SUPABASE_URL" $api_url "APP_SUPABASE_KEY" $api_key) }}
+{{ $supabase := $supabase | js.Build $opts -}}
 
 {{ $alpine := resources.Get "js/alpine.js" -}}
 {{ $alpine := $alpine | js.Build -}}
 
 {{ $auth := resources.Get "js/auth.js" -}}
-{{ $var := os.Getenv "HUGO_PARAMS_API_KEY" -}}
-{{ $defines := dict "process.env.APP_SUPABASE_URL" $var }}
-{{ $opts := dict "defines" $defines }}
-{{ $auth := $auth | js.Build $opts -}}
+{{ $auth := $auth | js.Build -}}
 
 {{ $highlight := resources.Get "js/highlight.js" -}}
 {{ $highlight := $highlight | js.Build -}}
@@ -78,6 +78,7 @@
   {{ if .Site.Params.options.flexSearch -}}
     <script src="{{ $index.RelPermalink }}" defer></script>
   {{ end -}}
+
   <script src="{{ $supabase.RelPermalink }}" defer></script>
   <script src="{{ $alpine.RelPermalink }}" defer></script>
   <script src="{{ $auth.RelPermalink }}" defer></script>
