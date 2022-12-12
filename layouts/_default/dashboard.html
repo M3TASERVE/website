@@ -1,0 +1,26 @@
+
+{{ define "main" }} 
+
+{{ partial "heroes/base.html" (dict "Title" .Title "HeroIcon" "cloud") }}
+
+<section class="section container mt-n7" x-data="user()">
+  <div class="overlay-card" style="padding-top: 10px;">
+    <div class="row align-items-center">
+
+      <div class="row">
+        <div class="col-6" style="border: 1px solid black;">
+          <template x-if="results.length == 0"><span>no data</span></template>
+          <table>
+            <template x-for="res in results"><tr><td x-text="res"></td></tr></template>
+          </table>
+
+          <button class="btn btn-primary" @click="retrieve()">Fetch</button>
+          <button class="btn btn-primary" @click="publish()">Send</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+{{ end }}
