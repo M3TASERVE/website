@@ -17,7 +17,7 @@
     "init": "rimraf .git && git init -b main",
     "create": "hugo new",
     "prestart": "npm run clean",
-    "start": "export $(cat .env.local | xargs) && hugo server --bind=0.0.0.0 --disableFastRender",
+    "start": "hugo server --bind=0.0.0.0 --disableFastRender --environment development",
     "prebuild": "npm run clean",
     "build": "hugo --gc --minify && npm run build:functions",
     "build:functions": "netlify-lambda build assets/lambda",
