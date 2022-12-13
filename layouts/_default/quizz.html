@@ -1,0 +1,45 @@
+{{ define "main" }}
+	<div class="row flex-xl-nowrap">
+		<div class="docs-sidebar{{ if ne .Site.Params.options.navbarSticky true }} docs-sidebar-top{{ end }} d-none d-lg-block col-xl-2">
+			<nav {{ if eq .Site.Params.menu.section.collapsibleSidebar false }}id="sidebar-default" {{ end }}class="docs-links" aria-label="Main navigation">
+				{{ partial "sidebar/docs-menu.html" . }}
+			</nav>
+		</div>
+		{{ if ne .Params.toc false -}}
+		<nav class="docs-toc{{ if ne .Site.Params.options.navbarSticky true }} docs-toc-top{{ end }} d-none d-xl-block col-xl-2" aria-label="Secondary navigation">
+			{{ partial "sidebar/docs-toc.html" . }}
+		</nav>
+		{{ end -}}
+
+		{{ if .Params.toc -}}
+		<main class="docs-content col-lg-11 col-xl{{ if eq .Site.Params.options.fullWidth false }}-9{{ end }}">
+		{{ else -}}
+		<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+		{{ end -}}
+
+            <h1 class="text-center mt-6 mb-6">{{ .Title }}</h1>
+			<p class="lead">{{ .Params.lead | safeHTML }}</p>
+
+            {{ $currentWeight := .Weight -}}			
+            <div x-data="user()" x-init="fetch('{{ .Params.quizz }}').then(response=> { if (!response.ok) console.log(`Something went wrong: ${response.status} - ${response.statusText}`); return response.json(); }).then(data => quizz.entries = data.entries)">
+                <template x-for="entry, idx in quizz.entries">
+                    <div class="pb-4">
+                        <div x-text="entry.title"></div>
+                        <div class="form-check">
+                        <template x-for="answer, num in entry.answers">
+                            <div class="pb-2">
+                                <input class="form-check-input" x-bind:name="'question_'+idx" type="radio" @click="quizz.answers[idx] = num"></input>
+                                <label class="form-check-label" x-text="answer"></label>
+                            </div>
+                        </template>
+                        </div>
+                    </div>
+                </template>
+                <button type="button" class="btn btn-primary btn-tertiary" @click="publish({{ $currentWeight }}, 'quizz', { answers: quizz.answers }); publish({{ $currentWeight }}, 'progress', {})">Send</button>
+            </div>
+			
+            <!-- {{ partial "main/docs-navigation.html" . }} -->
+            
+		</main>
+	</div>
+{{ end }}
