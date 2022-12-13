@@ -24,8 +24,12 @@
 					</ol>
 				</nav>
 			{{ end }}
+
+			{{ if not .Params.submit -}}
 			<h1 class="text-center mt-6 mb-6">{{ .Title }}</h1>
 			<p class="lead">{{ .Params.lead | safeHTML }}</p>
+			{{ end -}}
+
 			{{ if ne .Params.toc false -}}
 			<nav class="d-xl-none" aria-label="Quaternary navigation">
 				{{ partial "sidebar/docs-toc.html" . }}
@@ -33,7 +37,7 @@
 			{{ end -}}
 			
 			{{ .Content }}
-
+			
 			{{ if eq .Params.submit true -}}
 			{{ $currentWeight := .Weight -}}
 			<div class="mt-6 mb-6" x-data="user()" x-init="await retrieve(); if (submitted[{{ $currentWeight }}] != null) { submission.network = submitted[{{ $currentWeight }}].network; submission.address = submitted[{{ $currentWeight }}].address; }">

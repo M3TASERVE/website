@@ -28,6 +28,14 @@
       </div>
     </div>
     {{ partial "footer/script-footer.html" . }}
+    {{ else if eq .Type "quizz" . }}
+    {{ partial "header/header.html" . }}
+    <div class="wrap container-fluid" role="document">
+      <div class="content">
+        {{ block "main" . }}{{ end }}
+      </div>
+    </div>
+    {{ partial "footer/script-footer.html" . }}
     {{ else if eq .Type "dashboard" . }}
     {{ partial "header/header.html" . }}
     {{ block "main" . }}{{ end }}

@@ -35,10 +35,14 @@ Alpine.data('user', () => ({
     form: {
         email: '',
         password: '',
-    },    
+    },
     submission: {
         network: '',
         address: '',
+    },
+    quizz: {
+        entries: [],
+        answers: {}
     },
     signin() {
         var self = this;
@@ -81,18 +85,16 @@ Alpine.data('user', () => ({
     },
     async retrieve() {
         var self = this;
-        var response = await supabase.from('results').select('*').order('id').filter('created_by', 'eq', self.identity.sub);
-        
-            if (response.error) { 
-                console.log(response.error.message); 
-                showToast(self, response.error.message);
-            } else { 
-                console.log(response);
-                self.results.splice(0, self.results.length);
-                response.data.forEach(x => { self.results.push(JSON.stringify(x)); if (x.type == "progress") self.progression[x.number] = 1; else if (x.type == "submit") self.submitted[x.number] = x.content });
-                self.loaded = true;
-            }
-        
+        var response = await supabase.from('results').select('*').order('id').filter('created_by', 'eq', self.identity.sub);        
+        if (response.error) { 
+            console.log(response.error.message); 
+            showToast(self, response.error.message);
+        } else { 
+            console.log(response);
+            self.results.splice(0, self.results.length);
+            response.data.forEach(x => { self.results.push(JSON.stringify(x)); if (x.type == "progress") self.progression[x.number] = 1; else if (x.type == "submit") self.submitted[x.number] = x.content });
+            self.loaded = true;
+        }        
     },
     isDone(x) {
         return (x in this.progression);

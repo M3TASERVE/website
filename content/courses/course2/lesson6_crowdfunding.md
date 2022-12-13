@@ -8,6 +8,7 @@ menu:
     parent: "Course 2"
 weight: 26
 toc: true
+submit: true
 ---
 
 <!-- 
