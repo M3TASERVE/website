@@ -48,7 +48,7 @@
     "bootstrap-icons": "^1.7.2",
     "clipboard": "^2.0",
     "eslint": "^7.23",
-    "flexsearch": "^0.6",
+    "flexsearch": "^0.7",
     "highlight.js": "^10.7",
     "hugo-extended": "^0.92.0",
     "instant.page": "^5.1",
