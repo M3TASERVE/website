@@ -1,6 +1,6 @@
 {{ $currentPage := . -}}
-{{ range .Site.Menus.docs -}}
-  {{- $active := or (eq $currentPage.RelPermalink .URL) ($currentPage.HasMenuCurrent "docs" .) -}}
+{{ range .Site.Menus.courses -}}
+  {{- $active := or (eq $currentPage.RelPermalink .URL) ($currentPage.HasMenuCurrent "courses" .) -}}
   {{- $collapsible := eq .Name "Reference" }}
   <h3>
     {{ if $collapsible -}}
@@ -21,7 +21,7 @@
   {{ if .HasChildren -}}
   <ul id="{{ .Name }}-children" class="list-unstyled{{ if and $collapsible }} collapse{{ end }}{{ if $active }} show{{ end }}">
     {{ range .Children -}}
-    {{- $active := or ($currentPage.IsMenuCurrent "docs" .) ($currentPage.HasMenuCurrent "docs" .) -}}
+    {{- $active := or ($currentPage.IsMenuCurrent "courses" .) ($currentPage.HasMenuCurrent "courses" .) -}}
     <li>
       <a class="docs-link{{ if $active }} active{{ end }}" href="{{ .URL | relURL }}">
         <span style="vertical-align: middle">{{ .Name }}</span>
