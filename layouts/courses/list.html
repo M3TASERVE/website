@@ -1,27 +1,53 @@
 {{ define "main" }}
 <div class="row justify-content-center">
   <div class="col-md-12 col-lg-10 col-xl-8">
-    <article>
-      <h1 class="text-center">{{ if eq .CurrentSection .FirstSection }}{{ .Section | humanize }}{{ else }}{{ .Title }}{{ end }}</h1>
-      <div class="text-left">{{ .Content }}</div>
-			<div class="card-list">
-				{{ $currentPage := . }}
-				{{- range .Site.Menus.courses -}}
-					{{ $currentCourse := .Name }}
-					<h1 class="text-center">{{ .Name }}</h1>
-					{{ range where $currentPage.Site.RegularPages.ByWeight "Section" $currentPage.Section }}
-						{{ if in (.RelPermalink | string) $currentPage.RelPermalink }}
-						{{ if eq .Params.menu.courses.parent $currentCourse }}
-						<div class="card my-3">
-							<div class="card-body">
-								<a class="stretched-link" href="{{ .RelPermalink }}">{{ .Params.title | title }} &rarr;</a>
-							</div>
-						</div>
-						{{ end }}
-						{{ end }}				
-					{{ end }}
+    <article x-data="user()" x-init="retrieve()">
+
+	<table class="mt-6">
+		<tr style="text-align: left; vertical-align: top;">
+		{{ $currentPage := . }}
+		{{- range .Site.Menus.courses -}}
+		{{ $currentCourse := .Name }}
+		<td style="width: 200px; margin-right: 20px;">
+		<ul>
+			<h4>{{ .Name }}</h4>
+			{{ range where $currentPage.Site.RegularPages.ByWeight "Section" "courses" }}
+			{{ if eq .Params.menu.courses.parent $currentCourse }}
+			<li style="list-style: none;" class="pe-6">
+				<a href="{{ .RelPermalink }}">{{ .Params.title | title }}</a>				
+				<template x-if="loaded && progression[{{ .Params.weight }}]"><span class="float-end">✔️</span></template>
+				<template x-if="loaded && !progression[{{ .Params.weight }}]"><span class="float-end">❌</span></template>
+			</li>
+			{{ end }}
+			{{ end }}
+		</ul>
+		</td>
+		{{ end }}
+		</tr>
+	</table>
+
+    <!--
+	<h1 class="text-center">{{ if eq .CurrentSection .FirstSection }}{{ .Section | humanize }}{{ else }}{{ .Title }}{{ end }}</h1>
+    <div class="text-left">{{ .Content }}</div>
+	<div class="card-list">
+		{{ $currentPage := . }}
+		{{- range .Site.Menus.courses -}}
+			{{ $currentCourse := .Name }}
+			<h1 class="text-center">{{ .Name }}</h1>
+			{{ range where $currentPage.Site.RegularPages.ByWeight "Section" $currentPage.Section }}
+				{{ if in (.RelPermalink | string) $currentPage.RelPermalink }}
+				{{ if eq .Params.menu.courses.parent $currentCourse }}
+				<div class="card my-3">
+					<div class="card-body">
+						<a class="stretched-link" href="{{ .RelPermalink }}">{{ .Params.title | title }} &rarr;</a>
+					</div>
+				</div>
 				{{ end }}
-			</div>
+				{{ end }}				
+			{{ end }}
+		{{ end }}
+	</div>
+	-->
     </article>
   </div>
 </div>
