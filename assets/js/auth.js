@@ -28,6 +28,8 @@ Alpine.data('user', () => ({
     identity: infos ? infos.identities[0].identity_data : { email: "", sub: "" },
     logged: infos != null,
     results: [],
+    progression: { },
+    loaded: false,
     msg: "",
     form: {
         email: '',
@@ -59,9 +61,9 @@ Alpine.data('user', () => ({
         .then((response) => { handleResponse(this, response); })
         .catch((err) => { handleError(this, err); });
     },
-    publish() {
+    publish(id_lesson) {
         var self = this;
-        supabase.from('results').insert({ content: "test", created_by: self.identity.sub }).single()
+        supabase.from('results').insert({ content: id_lesson, created_by: self.identity.sub }).single()
         .then((response) => {
             if (response.error) { 
                 console.log(response.error.message); 
@@ -82,10 +84,16 @@ Alpine.data('user', () => ({
             } else { 
                 console.log(response);
                 self.results.splice(0, self.results.length);
-                response.data.forEach(x => { self.results.push(JSON.stringify(x)); });
+                response.data.forEach(x => { self.results.push(JSON.stringify(x)); self.progression[x.content] = 1; });
+                //Alpine.dispatch('peer-message', 'from-peer');
+                self.loaded = true;
+                //window.dispatchEvent(new CustomEvent('loaded-changed', { value: self.loaded }));
             }
         })
         .catch((err) => { handleError(this, err); });
+    },
+    isDone(x) {
+        return (x in this.progression);
     }
 }))
 

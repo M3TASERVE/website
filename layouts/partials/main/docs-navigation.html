@@ -1,6 +1,7 @@
 {{ if or .Prev .Next -}}
-	<div class="docs-navigation d-flex justify-content-between">
+	<div class="docs-navigation d-flex justify-content-between" x-data="user()">
 	<!-- https://www.feliciano.tech/blog/custom-sort-hugo-single-pages/ -->
+	{{ $currentWeight := .Weight -}}
 	{{ $pages := where site.RegularPages "Section" .Section -}}
 	{{ with $pages.Next . -}}
 		<a href="{{ .RelPermalink }}">
@@ -12,7 +13,7 @@
 		</a>
 	{{ end -}}
 	{{ with $pages.Prev . -}}
-		<a class="ms-auto" href="{{ .RelPermalink }}">
+		<a class="ms-auto" href="{{ .RelPermalink }}" @click="publish('{{ $currentWeight }}')">
 			<div class="card my-1">
 				<div class="card-body py-2">
 					{{ .Title }} &rarr;

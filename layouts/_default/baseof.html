@@ -28,6 +28,10 @@
       </div>
     </div>
     {{ partial "footer/script-footer.html" . }}
+    {{ else if eq .Type "dashboard" . }}
+    {{ partial "header/header.html" . }}
+    {{ block "main" . }}{{ end }}
+    {{ partial "footer/script-footer.html" . }}
     {{ else }}
     {{ partial "header/header.html" . }}
     {{ block "main" . }}{{ end }}
