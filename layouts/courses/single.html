@@ -24,14 +24,48 @@
 					</ol>
 				</nav>
 			{{ end }}
-			<h1>{{ .Title }}</h1>
+			<h1 class="text-center mt-6 mb-6">{{ .Title }}</h1>
 			<p class="lead">{{ .Params.lead | safeHTML }}</p>
 			{{ if ne .Params.toc false -}}
 			<nav class="d-xl-none" aria-label="Quaternary navigation">
 				{{ partial "sidebar/docs-toc.html" . }}
 			</nav>
 			{{ end -}}
+			
 			{{ .Content }}
+
+			{{ if eq .Params.submit true -}}
+			{{ $currentWeight := .Weight -}}
+			<div class="mt-6 mb-6" x-data="user()" x-init="await retrieve(); if (submitted[{{ $currentWeight }}] != null) { submission.network = submitted[{{ $currentWeight }}].network; submission.address = submitted[{{ $currentWeight }}].address; }">
+				<hr/>
+				<div>
+					<h2>Submit Practical</h2>
+					<p>Send your smart contract address to pass this level.</p>
+					<template x-if="submitted[{{ $currentWeight }}] == null">
+					<div class="input-group">
+						<select required="" aria-required="true" class="input-group-text" x-model="submission.network">
+							<option value="Ethereum Goerli" selected>Ethereum Goerli</option>
+							<option value="Ethereum Rinkeby">Ethereum Rinkeby</option>
+							<option value="Ethereum Ropsten">Ethereum Ropsten</option>
+							<option value="Flow Playground">Flow Playground</option>
+							<option value="Flow Testnet">Flow Testnet</option>
+							<option value="Polygon Mumbai">Polygon Mumbai</option>
+							<option value="Celo Alfajores">Celo Alfajores</option>
+							<option value="Ceramic Clay">Ceramic Clay</option>
+							<option value="The Graph">The Graph</option>
+						</select>
+						<input placeholder="0x..." class="form-control" x-model="submission.address"></input>
+						<button type="button" class="btn btn-primary btn-tertiary" @click="publish({{ $currentWeight }}, 'submit', { 'network': submission.network, 'address': submission.address })">Send</button>
+					</div>
+					</template>
+					<template x-if="submitted[{{ $currentWeight }}] != null">
+						<button type="button" class="btn btn-outline-dark">Submitted 🎉</button>
+					</template>
+				</div>
+				<hr/>
+			</div>
+			{{ end -}}
+
 			<div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
 				{{ if .Site.Params.lastMod -}}
 					{{ partial "main/last-modified.html" . }}

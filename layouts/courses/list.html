@@ -3,7 +3,7 @@
   <div class="col-md-12 col-lg-10 col-xl-8">
     <article x-data="user()" x-init="retrieve()">
 
-	<table class="mt-6">
+	<table class="mt-6" style="border-color: transparent;">
 		<tr style="text-align: left; vertical-align: top;">
 		{{ $currentPage := . }}
 		{{- range .Site.Menus.courses -}}
@@ -25,29 +25,7 @@
 		{{ end }}
 		</tr>
 	</table>
-
-    <!--
-	<h1 class="text-center">{{ if eq .CurrentSection .FirstSection }}{{ .Section | humanize }}{{ else }}{{ .Title }}{{ end }}</h1>
-    <div class="text-left">{{ .Content }}</div>
-	<div class="card-list">
-		{{ $currentPage := . }}
-		{{- range .Site.Menus.courses -}}
-			{{ $currentCourse := .Name }}
-			<h1 class="text-center">{{ .Name }}</h1>
-			{{ range where $currentPage.Site.RegularPages.ByWeight "Section" $currentPage.Section }}
-				{{ if in (.RelPermalink | string) $currentPage.RelPermalink }}
-				{{ if eq .Params.menu.courses.parent $currentCourse }}
-				<div class="card my-3">
-					<div class="card-body">
-						<a class="stretched-link" href="{{ .RelPermalink }}">{{ .Params.title | title }} &rarr;</a>
-					</div>
-				</div>
-				{{ end }}
-				{{ end }}				
-			{{ end }}
-		{{ end }}
-	</div>
-	-->
+	
     </article>
   </div>
 </div>

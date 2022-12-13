@@ -28,12 +28,17 @@ Alpine.data('user', () => ({
     identity: infos ? infos.identities[0].identity_data : { email: "", sub: "" },
     logged: infos != null,
     results: [],
-    progression: { },
+    progression: {},
+    submitted: {},
     loaded: false,
     msg: "",
     form: {
         email: '',
         password: '',
+    },    
+    submission: {
+        network: '',
+        address: '',
     },
     signin() {
         var self = this;
@@ -61,9 +66,9 @@ Alpine.data('user', () => ({
         .then((response) => { handleResponse(this, response); })
         .catch((err) => { handleError(this, err); });
     },
-    publish(id_lesson) {
+    publish(id_lesson, data_type, content) {
         var self = this;
-        supabase.from('results').insert({ content: id_lesson, created_by: self.identity.sub }).single()
+        supabase.from('results').insert({ number: id_lesson, type: data_type, content: content, created_by: self.identity.sub }).single()
         .then((response) => {
             if (response.error) { 
                 console.log(response.error.message); 
@@ -74,23 +79,20 @@ Alpine.data('user', () => ({
         })
         .catch((err) => { handleError(this, err); });
     },
-    retrieve() {
+    async retrieve() {
         var self = this;
-        supabase.from('results').select('*').order('id').filter('created_by', 'eq', self.identity.sub)
-        .then((response) => {
+        var response = await supabase.from('results').select('*').order('id').filter('created_by', 'eq', self.identity.sub);
+        
             if (response.error) { 
                 console.log(response.error.message); 
                 showToast(self, response.error.message);
             } else { 
                 console.log(response);
                 self.results.splice(0, self.results.length);
-                response.data.forEach(x => { self.results.push(JSON.stringify(x)); self.progression[x.content] = 1; });
-                //Alpine.dispatch('peer-message', 'from-peer');
+                response.data.forEach(x => { self.results.push(JSON.stringify(x)); if (x.type == "progress") self.progression[x.number] = 1; else if (x.type == "submit") self.submitted[x.number] = x.content });
                 self.loaded = true;
-                //window.dispatchEvent(new CustomEvent('loaded-changed', { value: self.loaded }));
             }
-        })
-        .catch((err) => { handleError(this, err); });
+        
     },
     isDone(x) {
         return (x in this.progression);

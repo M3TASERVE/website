@@ -13,7 +13,7 @@
 		</a>
 	{{ end -}}
 	{{ with $pages.Prev . -}}
-		<a class="ms-auto" href="{{ .RelPermalink }}" @click="publish('{{ $currentWeight }}')">
+		<a class="ms-auto" href="{{ .RelPermalink }}" @click="publish({{ $currentWeight }}, 'progress', {})">
 			<div class="card my-1">
 				<div class="card-body py-2">
 					{{ .Title }} &rarr;
