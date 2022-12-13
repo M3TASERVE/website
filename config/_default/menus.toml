@@ -1,11 +1,6 @@
 [[main]]
   name = "Courses"
-  url = "/docs/"
-  weight = 10
-
-[[main]]
-  name = "Process"
-  url = "/process/"
+  url = "/courses/"
   weight = 20
 
 [[main]]
@@ -14,21 +9,27 @@
   weight = 30
 
 [[main]]
-  name = "FAQ"
-  url  = "/faq"
+  name = "PROCESS"
+  url  = "/bootcamp/process"
   weight = 5
   parent = "Bootcamp"
 
 [[main]]
-  name = "CONTACTS"
-  url  = "/contact"
+  name = "FAQ"
+  url  = "/bootcamp/faq"
   weight = 10
+  parent = "Bootcamp"
+
+[[main]]
+  name = "CONTACT"
+  url  = "/bootcamp/contact"
+  weight = 15
   parent = "Bootcamp"
   
 [[main]]
   name = "ABOUT US"
-  url  = "/about"
-  weight = 15
+  url  = "/bootcamp/about"
+  weight = 20
   parent = "Bootcamp"
 
 [[social]]
