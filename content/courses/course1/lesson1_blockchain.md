@@ -68,8 +68,8 @@ On the other hand, decentralization brings about the opposite benefits.
 - No downtime as the overall network is running across 1000's of nodes across the globe
 - Highly attack resistant making it infeasible to manipulate or destroy data
 -->
-![](/wp-content/uploads/2022/06/decentralization.png)
-*Source: https://aws.amazon.com/fr/blockchain/decentralization-in-blockchain*
+<img style="width: 800px;" src="/wp-content/uploads/2022/06/decentralization.png"></img>
+<div style="font-style: italic; margin-bottom: 12px;"><a href="https://aws.amazon.com/fr/blockchain/decentralization-in-blockchain">Source</a></div>
 
 Decentralization should be applied where it makes sense. Just because it’s a blockchain application doesn’t mean it needs to be 100% decentralized. The goal of any blockchain solution is to deliver what the users of that solution need, and this may or may not include certain levels of decentralization.
 
@@ -78,11 +78,11 @@ Decentralization should be applied where it makes sense. Just because it’s a b
 Blockchains start off with a Genesis State when they launch. Bitcoin's genesis state happened in 2009 when the public network launched. Ethereum's Genesis State happened in 2015, when it launched.
 Every transaction on a blockchain modifies the global state that is replicated across all nodes.
 
-![](/wp-content/uploads/2022/06/state.png)
+<img style="width: 600px;" src="/wp-content/uploads/2022/06/state.png"></img>
 
 Since there are millions of transactions, transactions get grouped together in blocks. Hence the name. These blocks are chained together in a cryptographically verifiable way so they are historically traceable. The current state of a network can be recalculated at any time by starting from the genesis block and transitioning the state according to each block's information up until now.
 
-![](/wp-content/uploads/2022/06/chain.png)
+<img style="width: 600px;" src="/wp-content/uploads/2022/06/chain.png"></img>
 
 Every block has the following components:
 * Data – a combined set of transactions that were mined, confirmed, and incorporated in the block.
@@ -122,7 +122,7 @@ Here is a brief overview of its history:
 Smart contracts are small computer programs that are replicated and processed on all the computers on the Ethereum network without a central coordinator. Smart Contracts allow for any number of possible applications to be built on top. It can help to digitize and automate the execution of business workflows (i.e., self-executing contracts or agreements), and whose proper execution is automatically enforced by the consensus mechanism of the Ethereum blockchain.
 Because a deployed Smart Contract cannot be erased, Ethereum is sometimes identified as “The unstoppable computer”.
 
-![](/wp-content/uploads/2022/06/ethereum.png)
+<img style="width: 400px;" src="/wp-content/uploads/2022/06/ethereum.png"></img>
 
 Ethereum is running since the release of its [whitepaper](https://ethereum.org/en/whitepaper/) 📖 in 2015. On this platform, developers can build dApps, or decentralized applications, which can be executed on the Ethereum network. The global state of Ethereum therefore consists of more than just the balance of every account, but also the state of each dApp.
 dApps are built on Ethereum using a Turing-complete programming language named [Solidity](https://en.wikipedia.org/wiki/Solidity) 📚. You can write smart contracts using Solidity and deploy the smart contracts to the Ethereum Network.

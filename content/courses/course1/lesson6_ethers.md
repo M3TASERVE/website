@@ -40,23 +40,23 @@ The INFURA service has been around for quite some time and is very robust and re
 
 First, we have to [register](https://infura.io/register) on Infura.
 
-![](/wp-content/uploads/2022/06/infura_1.png)
+<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_1.png"></img>
 
 Then, you should receive an email that ask you to confirm the email address. After confirmation, you will be able to finalize your registration.
 
-![](/wp-content/uploads/2022/06/infura_2.png)
+<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_2.png"></img>
 
 Then you have to create a project for our tests.
 
-![](/wp-content/uploads/2022/06/infura_3.png)
+<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_3.png"></img>
 
 In the end, you will be able to acccess the Infura dashboard of your project.
 
-![](/wp-content/uploads/2022/06/infura_4.png)
+<img style="width: 600px;" src="/wp-content/uploads/2022/06/infura_4.png"></img>
 
 In the settings panel, you can get your Project ID. We will need it in the sequel.
 
-![](/wp-content/uploads/2022/06/infura_5.png)
+<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_5.png"></img>
 
 Now that we have an Infura account, we will reuse ethers.js, use it to connect to a web3 provider, and get information from the Ethereum network.
 For our tests, we will use a testnet named Ropsten.
@@ -72,12 +72,14 @@ PROJECT_ID="YOUR PROJECT ID"
 ```
 1. Write the following code in a file `script.js`
 ```js
-const dotenv = require("dotenv"); dotenv.config(); // Make sure that .env file contains the variables: 
+// Make sure that .env file contains the variables: 
+const dotenv = require("dotenv"); dotenv.config(); 
 const ethers = require('ethers');
 
 const network = "ropsten"; // testnet name
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
-const provider = new ethers.providers.InfuraProvider(network, { projectId: process.env.PROJECT_ID });
+const provider = new ethers.providers.InfuraProvider(network, 
+    { projectId: process.env.PROJECT_ID });
 const gateway = wallet.connect(provider);
 
 async function run() {
@@ -163,40 +165,40 @@ $ npx http-server
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-    <script>
-      const network = "ropsten"; // testnet name
-      const provider = new ethers.providers.Web3Provider(window.ethereum, network);
-      const signer = provider.getSigner();
+<head>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+<script>
+    const network = "ropsten"; // testnet name
+    const provider = new ethers.providers.Web3Provider(window.ethereum, network);
+    const signer = provider.getSigner();
 
-        async function run() {
-            await provider.send("eth_requestAccounts", []);            
-            console.log("Account:", await signer.getAddress());
-            let userAddress = await signer.getAddress();
-            document.getElementById("wallet").innerText = "Your wallet is " + userAddress;
-            
-            var tx = await signer.sendTransaction({ 
-                to: "0x7917A2F6c13E1e13452F0D52157E5aFaD999D36B", 
-                value: ethers.utils.parseEther("1.0"), 
-                nonce: await signer.getTransactionCount()
-            });
-            document.getElementById("tx").innerText = "Tx: " + JSON.stringify(tx);
-        }
+    async function run() {
+        await provider.send("eth_requestAccounts", []);            
+        console.log("Account:", await signer.getAddress());
+        let userAddress = await signer.getAddress();
+        document.getElementById("wallet").innerText = "Your wallet is " + userAddress;
+        
+        var tx = await signer.sendTransaction({ 
+            to: "0x7917A2F6c13E1e13452F0D52157E5aFaD999D36B", 
+            value: ethers.utils.parseEther("1.0"), 
+            nonce: await signer.getTransactionCount()
+        });
+        document.getElementById("tx").innerText = "Tx: " + JSON.stringify(tx);
+    }
 
-        (async function main() { 
-            try {
-                run();
-            } catch(err) { 
-                console.error(err); 
-            } 
-        })();
-    </script>
-  </head>
-  <body>
-    <div id="wallet"></div>
-    <div id="tx"></div>
-  </body>
+    (async function main() { 
+        try {
+            run();
+        } catch(err) { 
+            console.error(err); 
+        } 
+    })();
+</script>
+</head>
+<body>
+<div id="wallet"></div>
+<div id="tx"></div>
+</body>
 </html>
 ```
 3. Open your web browser: `localhost:8080`

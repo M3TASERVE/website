@@ -28,7 +28,7 @@ Go through the documentation at [Remix IDE Docs](https://remix-ide.readthedocs.i
 
 When you first open Remix, you will be greeted with a screen like this.
 
-![](/wp-content/uploads/2022/07/remix1.png)
+<img style="width: 800px;" src="/wp-content/uploads/2022/07/remix1.png"></img>
 
 In the left sidebar, you can switch between the `File Explorer`, the `Solidity Compiler`, the `Deployer`, and an `Extensions` panel.
 In the bottom, there is an output panel, which displays output from your compilation, your deployments, and your function calls. 
@@ -40,7 +40,7 @@ For the next projects, you will be provided with a user interface to test your S
 You can start by using Remix to test calls and transactions however to check the compliance of the contract to a required interface we propose to use a simple UI implemetation to interact with the contract.
 This interface requires Metamask and that the Smart Contract is deployed on a testnet.
 
-![](/wp-content/uploads/2022/10/vote.png)
+<img style="width: 800px;" src="/wp-content/uploads/2022/10/vote.png"></img>
 
 Note that unit test could have been provided to test the contract but that is another lesson.
 
