@@ -12,7 +12,7 @@
         <a class="btn btn-primary btn-lg" href="/courses" target="_blank">START LEARNING</a>
       </div>
       <div class="col-12 col-sm-10 col-md-5 order-0 order-md-1">
-        <img style="max-width: 100%" src="/images/landing/Asset 1.svg"
+        <img style="max-width: 100%" src="/images/landing/metaserve1.svg"
           alt="Illustration of a laptop in a cloud hosting stacks"></img>
       </div>
     </div>
@@ -109,7 +109,10 @@
           <div class="divider"></div>
           <p>Learn Solidity in-depth and fast-track your Ethereum developer career. The course also includes multiple puzzles and coding challenges to hone your Solidity skill sets.</p>
         </div>
-      </div>     
+      </div>  
+      <div class="d-flex flex-column gap-4 justify-content-center col-12 col-lg-12 mt-6" style="align-items: center;">
+          <a class="btn btn-primary btn-lg" href="mailto:info@m3taserve.cloud">EXPLORE</a>
+      </div>
     </div>
   </div>
 </section>
@@ -122,32 +125,15 @@
           <div>
             <p>Join the M3taserve bootcamp with interactive coding challenges, in-depth lessons, projects and expert instructors to teach you to build smart contracts, master solidity, and become a web3 developer.</p>
           </div>
-          <a class="btn btn-primary btn-lg" href="mailto:info@m3taserve.cloud">TODO</a>
+          <a class="btn btn-primary btn-lg" href="mailto:info@m3taserve.cloud">TAKE YOUR SPOT</a>
       </div>
     </div>
 </section>
 
-<!-- <section class="section section-sm mt-n11 mb-5">
-  <div class="container overlay-card">
-    <div class="d-flex flex-column px-4 py-2 px-md-6 py-md-5 px-lg-6 pb-md-6 gap-6">
-      <div class="row">
-        <div class="strike-dark">
-          <h2>Why join M3TASERVE?</h2>
-        </div>
-      </div>
-      <div class="row d-flex align-items-center justify-content-center">
-        <div class="col-12 col-lg-12 d-flex justify-content-center flex-column">
-          <h2 class="mt-0">Start learning and building the next generation of Web3 dApps. </h2>
-          <p>Join the M3taserve bootcamp with interactive coding challenges, in-depth lessons, projects and expert instructors to teach you to build smart contracts, master solidity, and become a web3 developer.</p>
-        </div>
-      </div>    
-    </div>
-</section> -->
-
 <section class="section section-sm bg-gradient-dark pb-6">
   <div class="container pb-6 pt-7">
       <div class="row justify-content-center align-items-center text-white gap-3">
-          <h1 class="text-center m-0 pt-5">How M3TASERVE works?</h1>
+          <h2 class="text-center m-0 pt-5">Why join M3TASERVE?</h2>
       </div>
   </div>
   <div class="container mb-6">
@@ -155,13 +141,11 @@
           <div class="col-12 col-sm-6 col-lg-3">
               <div class="color-card-border">
                   <div class="pricing-card gap-4">
-                      <h3>Free courses</h3>
+                      <h3 class="text-secondary">Free <br />courses</h3>
                       <div class="d-flex flex-column gap-4">
-                          {{ partial "misc/pricing-feature.html" (dict "featureName" "Basic APIs") }}
-                          {{ partial "misc/pricing-feature.html" (dict "featureName" "m3taserve Cockpit UI") }}
-                      </div>
-                      <div class="w-100 flex-grow-1 d-flex align-items-end">
-                          <a href="https://github.com/m3taserve/m3taserve" target="_blank" class="btn btn-primary btn-tertiary w-100">GET STARTED</a>
+                          {{ partial "misc/pricing-feature.html" (dict "featureName" "Our courses are free of cost") }}
+                          {{ partial "misc/pricing-feature.html" (dict "featureName" "Open source and always up to date") }}
+                          {{ partial "misc/pricing-feature.html" (dict "featureName" "Built by Web3 developers themselves") }}
                       </div>
                   </div>
               </div>
@@ -169,13 +153,11 @@
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="color-card-border">
                 <div class="pricing-card gap-4">
-                    <h3>Self-paced</h3>
+                    <h3 class="text-secondary">Self-<br />paced</h3>
                     <div class="d-flex flex-column gap-4">
-                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Basic APIs") }}
-                        {{ partial "misc/pricing-feature.html" (dict "featureName" "m3taserve Cockpit UI") }}
-                    </div>
-                    <div class="w-100 flex-grow-1 d-flex align-items-end">
-                        <a href="https://github.com/m3taserve/m3taserve" target="_blank" class="btn btn-primary btn-tertiary w-100">GET STARTED</a>
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Comprehensive self-paced program") }}
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Anytime, anywhere access to course material") }}
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Learn on-demand, all at once or a few minutes at a time") }}
                     </div>
                 </div>
             </div>
@@ -183,13 +165,11 @@
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="color-card-border">
                 <div class="pricing-card gap-4">
-                    <h3>Learn by doing</h3>
+                    <h3 class="text-secondary">Learn by <br />doing</h3>
                     <div class="d-flex flex-column gap-4">
-                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Basic APIs") }}
-                        {{ partial "misc/pricing-feature.html" (dict "featureName" "m3taserve Cockpit UI") }}
-                    </div>
-                    <div class="w-100 flex-grow-1 d-flex align-items-end">
-                        <a href="https://github.com/m3taserve/m3taserve" target="_blank" class="btn btn-primary btn-tertiary w-100">GET STARTED</a>
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Get foundational understanding of blockchain") }}
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Build your own token or wallet") }}
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Use the skills you learn to ship your own projects") }}
                     </div>
                 </div>
             </div>
@@ -197,45 +177,15 @@
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="color-card-border">
                 <div class="pricing-card gap-4">
-                    <h3>Future proof your skills</h3>
+                    <h3 class="text-secondary">Future proof your skills</h3>
                     <div class="d-flex flex-column gap-4">
-                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Basic APIs") }}
-                        {{ partial "misc/pricing-feature.html" (dict "featureName" "m3taserve Cockpit UI") }}
-                    </div>
-                    <div class="w-100 flex-grow-1 d-flex align-items-end">
-                        <a href="https://github.com/m3taserve/m3taserve" target="_blank" class="btn btn-primary btn-tertiary w-100">GET STARTED</a>
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Get chosen for our 2-month private sprint") }}
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Get the skills you need to become an industry-leading developer") }}
+                        {{ partial "misc/pricing-feature.html" (dict "featureName" "Get access to exclusive job opportunities with leading Web3 teams") }}
                     </div>
                 </div>
             </div>
           </div>                             
-      </div>
-  </div>
-  <div class="container text-white fst-italic d-flex flex-column gap-2 fs-6">
-      <div>
-          * 14 days <b>free trial</b>, plus 20% introductory discount for the first 2 months
-      </div>
-      <div>
-          ** 14 days <b>free trial</b>, plus 50% introductory discount for the first 3 months
-      </div>
-      <div>
-          1: 100 base credits for the first 3 users + 20 additional credits per additional user / month
-      </div>
-      <div>
-          2: 1000 base credits for the first 3 users + 200 additional credits per user / month
-      </div>
-      <div>
-          3: managed cloud storage, limit of 500 MB per user
-      </div>
-      <div>
-          4: managed cloud storage, limit of 5 GB per seat
-      </div>
-      <div>
-          If you are a student or an educator, you can avail 6 months educational access to m3taserve through 
-          our <a href="/educational-license" class="text-white"><u>Educational License program</u></a>.
-      </div>
-      <div>
-          If you are running a non-commercial, open-source project, you can avail 12 months access to m3taserve through
-          our <a href="/open-source-sponsorship" class="text-white"><u>Open Source Sponsorship program</u></a>.
       </div>
   </div>
 </section>
@@ -251,7 +201,7 @@
           <img src="/images/landing/6588177.jpg" alt="core cloud emulation"></img>
           <h3>
             <a href="/solutions/cloud-emulation" class="stretched-link text-white">
-              Sign up & Join the bootcamp
+              Sign up and join the bootcamp
             </a>
           </h3>
           <div class="divider"></div>
@@ -279,8 +229,7 @@
             </a>
           </h3>
           <div class="divider"></div>
-          <p>Interview with us and be one of the 15 candidates (1st batch) chosen to be hired internally for a 2-month sprint, where you will directly work with the best Web3 developers on real-life projects.
-          </p>
+          <p>Interview with us and be one of the candidates chosen to be hired and personally trained by our internal dev team for a 2-month sprint.</p>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-12">
