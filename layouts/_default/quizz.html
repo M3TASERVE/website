@@ -20,8 +20,10 @@
             <h1 class="text-center mt-6 mb-6">{{ .Title }}</h1>
 			<p class="lead">{{ .Params.lead | safeHTML }}</p>
 
-            {{ $currentWeight := .Weight -}}			
             <div x-data="user()" x-init="fetch('{{ .Params.quizz }}').then(response=> { if (!response.ok) console.log(`Something went wrong: ${response.status} - ${response.statusText}`); return response.json(); }).then(data => quizz.entries = data.entries)">
+            {{ $currentWeight := .Weight -}}
+            <template class="mt-6 mb-6" x-if="logged">
+            <div>
                 <template x-for="entry, idx in quizz.entries">
                     <div class="pb-4">
                         <div x-text="entry.title"></div>
@@ -36,6 +38,14 @@
                     </div>
                 </template>
                 <button type="button" class="btn btn-primary btn-tertiary" @click="publish({{ $currentWeight }}, 'quizz', { answers: quizz.answers }); publish({{ $currentWeight }}, 'progress', {})">Send</button>
+            </div>
+            </template>
+            <template class="mt-6 mb-6" x-if="!logged">
+            <div style="border-top: 1px solid gray; border-bottom: 1px solid gray; height: 80px; padding: 20px 5px 10px 5px;">
+                <div class="float-start">You need to be signed-in to submit your quiz.</div>
+                <div class="float-end"><a class="btn btn-primary btn-tertiary" type="link" href="/signin"><i class="bi bi-person"></i> SIGN IN</a></div>
+            </div>
+            </template>
             </div>
 			
             <!-- {{ partial "main/docs-navigation.html" . }} -->
