@@ -1,12 +1,8 @@
-# LocalStack
-#localStackApiEndpoint = "http://localhost:5000/download"
-localStackApiEndpoint = "https://api.localstack.cloud/download"
-
 
 # Meta Data for SEO
 
 ## Homepage
-title = "LocalStack"
+title = "m3taserve"
 logo = "/images/m3taserve.svg"
 titleSeparator = "-"
 titleAddition = "A fully functional local cloud stack"
@@ -14,18 +10,16 @@ description = "Develop and test your cloud apps offline"
 
 ## Open Graph + Twitter Cards
 images = ["/images/og-preview-image.png", "/images/header-logo.svg"]
-twitterSite = "_localstack"
-twitterCreator = "_localstack"
-#facebookAuthor = "localstack"
-#facebookPublisher = "localstack"
+twitterSite = "m3taserve"
+twitterCreator = "m3taserve"
 ogLocale = "en_US"
 
 ## JSON-LD
 schemaType = "Organization"
 schemaLogo = "/images/og-preview-image.png"
-schemaTwitter = "https://twitter.com/_localstack"
+schemaTwitter = "https://twitter.com/m3taserve"
 schemaLinkedIn = "https://www.linkedin.com/"
-schemaGitHub = "https://github.com/localstack"
+schemaGitHub = "https://github.com/M3TASERVE"
 schemaSection = "blog"
 
 ## Sitelinks Search Box
@@ -46,7 +40,7 @@ alert = false
 alertText = "Like Doks? <a class=\"alert-link\" href=\"https://github.com/h-enk/doks/stargazers\">Star on GitHub</a>. Thanks!</a>"
 
 # Edit Page
-docsRepo = "https://github.com/localstack/localstack.github.io"
+docsRepo = "https://github.com/M3TASERVE/website"
 editPage = false
 
 [options]

@@ -15,15 +15,15 @@ For the purposes of this Privacy Policy:
 
 * **You** means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
 
-* **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to LocalStack.
+* **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to m3taserve.
 
 * **Affiliate** means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
 
 * **Account** means a unique account created for You to access our Service or parts of our Service.
 
-* **App** refers to the LocalStack app, accessible from https://app.localstack.cloud
+* **App** refers to the m3taserve app, accessible from https://app.m3taserve.cloud
 
-* **Platform** refers to the LocalStack platform which provides users with software services and Application Programming Interfaces (APIs) to develop and test cloud applications.
+* **Platform** refers to the m3taserve platform which provides users with software services and Application Programming Interfaces (APIs) to develop and test cloud applications.
 
 * **Service** collectively refers to the App and the Platform, and any associated services provided.
 
@@ -147,7 +147,7 @@ As set out in locally applicable Personal Data protection law, You may have:
 
 * **The right to data portability** Under certain circumstances, You may have the right to receive the Personal Data concerning You, which You have provided to Us, in a structured, commonly used, and machine-readable format, and to transmit these Personal Data to another entity.
 
-If You make a request, we have one month to respond to You. If You would like to exercise any of these rights, please contact Us at our email: info@localstack.cloud
+If You make a request, we have one month to respond to You. If You would like to exercise any of these rights, please contact Us at our email: info@m3taserve.cloud
 
 ## Links to Other Websites
 
@@ -163,7 +163,7 @@ You are advised to review this Privacy Policy periodically for any changes. Chan
 
 ## How to contact Us
 
-If you have any questions or comments about this Privacy Policy or Our privacy practices, you can contact Us at any time at info@localstack.cloud
+If you have any questions or comments about this Privacy Policy or Our privacy practices, you can contact Us at any time at info@m3taserve.cloud
 
 ---
 Last updated: March, 2022 (2022.v1)
