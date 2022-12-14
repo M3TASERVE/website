@@ -46,10 +46,9 @@ contract ERC20 {
 }
 ```
 
-
-```solidity
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
-```
+<div style="width: 800px; margin-bottom: 22px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 600px;" title="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol"><code>
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";</code>
+</div>
 
 The `ERC-20` token standard is now referenced in the library of standards [OpenZeppelin](https://openzeppelin.com/) (OZ). 
 OZ is an Ethereum security company. Among other things, OZ develops reference contracts for popular smart contract standards which are thoroughly tested and secure. Whenever implementing a smart contract which needs to comply with a standard, try to find an OZ reference implementation rather than rewriting the entire standard from scratch.
