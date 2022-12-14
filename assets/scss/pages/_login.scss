@@ -1,10 +1,16 @@
 
 body.login {
     height: 100%;
-    background: $body-bg-dark;
-    color: $body-color-dark;
+    background: $black;
+    color: $white;
+    
 }
-  
+
+body.login a {
+    color: $white;
+    text-decoration: underline;
+}
+
 body.login .toast {
     background: $body-bg;
     color: $body-color;
