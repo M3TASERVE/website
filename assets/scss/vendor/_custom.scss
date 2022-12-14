@@ -105,7 +105,7 @@ tr.no-border-bottom td {
   flex-direction: column;
   align-items: center;
   padding: 28px;
-  background: linear-gradient(15deg, #271E5A -35%, #7E5ACA 145%);
+  background: linear-gradient(15deg, $m3ta-dark-grey -35%, $m3ta-dark-grey 145%);
   border-radius: 20px;
   width: 100%;
 }
@@ -127,7 +127,7 @@ tr.no-border-bottom td {
   width: 100%;
   padding: 1rem 2rem;
   border-radius: 5px;
-  background: #39227A;
+  background: $black;
   display: flex;
   justify-content: center;
 }
@@ -139,7 +139,7 @@ tr.no-border-bottom td {
 .color-card-border {
   display: flex;
   padding: 1px !important;
-  background: linear-gradient(200deg, #26C076 0%, #595482 100%);
+  background: linear-gradient(200deg, $m3ta-fuchsia 0%, $m3ta-fuchsia 100%);
   border-radius: 20px;
   height: 100%;
 }
@@ -150,6 +150,7 @@ tr.no-border-bottom td {
 
 .solution-card img {
   width: 100%;
+  border-radius: 30px;
 }
 
 .solution-card h3 {
