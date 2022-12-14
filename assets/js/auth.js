@@ -33,8 +33,8 @@ Alpine.data('user', () => ({
     loaded: false,
     msg: "",
     form: {
-        email: '',
-        password: '',
+        email: { value: "", errorMessage: "" },
+        password: { value: "", errorMessage: "" }        
     },
     submission: {
         network: '',
@@ -44,17 +44,24 @@ Alpine.data('user', () => ({
         entries: [],
         answers: {}
     },
+    submit: function (submitType) {
+        let flag = true;
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (this.form.email.value.length == 0 || !this.form.email.value.match(validRegex)) { this.form.email.errorMessage = "Please enter a valid email."; flag = false; } else { this.form.email.errorMessage = ""; }
+        if (this.form.password.value.length < 10 ) { this.form.password.errorMessage = "Password length must be at least 10 characters."; flag = false; } else { this.form.password.errorMessage = ""; }
+        if (flag) { if (submitType == 'signin') this.signin(); else this.signup(); }
+    },
     signin() {
-        var self = this;
+        var self = this;        
         supabase.auth
-        .signIn({ email: self.form.email, password: self.form.password })
+        .signIn({ email: self.form.email.value, password: self.form.password.value })
         .then((response) => { handleResponse(this, response); })
         .catch((err) => { handleError(this, err); });
     },
     signup() {
         var self = this;
         supabase.auth
-        .signUp({ email: self.form.email, password: self.form.password })
+        .signUp({ email: self.form.email.value, password: self.form.password.value })
         .then((response) => { handleResponse(this, response); })
         .catch((err) => { handleError(this, err); });
     },

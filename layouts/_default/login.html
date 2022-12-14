@@ -20,23 +20,25 @@
 
       <div class="col-12 tab-content text-center">
         
-        <div style="height: 60px;"><img src="/images/m3taserve.svg" height="33px" alt="Logo" style="margin-bottom: -10px;"></img></div>
+        <div style="height: 60px;"><a href="/"><img src="/images/m3taserve.svg" height="33px" alt="Logo" style="margin-bottom: -10px;"></img></a></div>
         
         <template x-if="login">
         <div>
           <h1>Log In</h1>
           <p>Enter your email address and password.</p>                  
           <div style="margin-top: 10px;">
-  
-              <div class="row form-group gy-1 gy-md-3 mb-3">
+
+              <div class="row form-group gy-1 gy-md-3 mb-3 has-validation">
                 <div class="col-12">
-                  <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email"/>
+                  <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email.value"/>
+                  <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.email.errorMessage"></div>
                 </div>
               </div>
               
               <div class="row form-group gy-1 gy-md-3 mb-3">
                 <div class="col-12">
-                  <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.password"/>
+                  <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.password.value"/>
+                  <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.password.errorMessage"></div>
                 </div>
               </div>
   
@@ -48,7 +50,7 @@
 
               <div class="row form-group">
                 <div class="mt-2 text-sm leading-5">
-                  <button class="btn btn-primary btn-tertiary btn-lg btn-block" @click="signin()">Log In</button>
+                  <button class="btn btn-primary btn-tertiary btn-lg btn-block" @click="submit('signin')">Log In</button>
                 </div>
               </div>
 
@@ -70,19 +72,21 @@
   
               <div class="row form-group gy-1 gy-md-3 mb-3">
                 <div class="col-12">
-                  <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email"/>
+                  <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email.value"/>
+                  <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.email.errorMessage"></div>
                 </div>
               </div>
               
               <div class="row form-group gy-1 gy-md-3 mb-3">
                 <div class="col-12">
-                  <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.password"/>
+                  <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.password.value"/>
+                  <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.password.errorMessage"></div>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="mt-2 text-sm leading-5">
-                  <button class="btn btn-primary btn-tertiary btn-lg btn-block" @click="signup()">Sign Up</button>
+                  <button class="btn btn-primary btn-tertiary btn-lg btn-block" @click="submit('signup')">Sign Up</button>
                 </div>
               </div>
 
