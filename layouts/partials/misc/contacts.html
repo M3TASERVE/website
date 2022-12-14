@@ -3,22 +3,22 @@
         <div class="col col-md-5 d-flex flex-column gap-4 flex-grow-1 jusitfy-space-between">
                 {{ partial "misc/contact-card.html" (dict "contactName" "Discussion"
                 "text" "Our new discussion platform:"
-                "link" "discuss.localstack.cloud"
+                "link" "discuss.m3taserve.cloud"
                 "type" "link"
                 ) }}
                 {{ partial "misc/contact-card.html" (dict "contactName" "E-mail"
                 "text" "For any administrative questions"
-                "link" "info@localstack.cloud"
+                "link" "info@m3taserve.cloud"
                 "type" "mail"
                 ) }}
                 {{ partial "misc/contact-card.html" (dict "contactName" "Slack"
                 "text" "Please join our Slack community"
-                "link" "slack.localstack.cloud"
+                "link" "slack.m3taserve.cloud"
                 "type" "link"
                 ) }}
                 {{ partial "misc/contact-card.html" (dict "contactName" "GitHub"
                 "text" "For any bug reports, please first consult the main GitHub repository"
-                "link" "github.com/localstack/localstack"
+                "link" "github.com/m3taserve/website"
                 "type" "link"
                 ) }}
             {{/* TODO: discuss */}}
@@ -59,7 +59,7 @@
         const email = document.getElementById('email')
         const phonenumber = document.getElementById('phonenumber')
         const message = document.getElementById('message')
-        const link = "mailto:info@localstack.cloud?subject="+firstname.value+" "+lastname.value+" "+phonenumber.value+"&body="+message.value
+        const link = "mailto:info@m3taserve.cloud?subject="+firstname.value+" "+lastname.value+" "+phonenumber.value+"&body="+message.value
         window.location.href = link
     }
 </script>

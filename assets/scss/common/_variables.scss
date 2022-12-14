@@ -22,7 +22,7 @@ $brown:    #aa9c84;
 $blue-300: #8ed6fb;
 $pink-500: #d32e9d;
 
-// localstack blues
+// blues
 $blue-mid:   #6577E7;
 $blue-dark:  #4755AC;
 
@@ -98,7 +98,7 @@ $container-max-widths: (
   md: 720px,
   lg: 1020px,
   xl: 1156px,
-  xxl: 1156px
+  xxl: 1158px
 );
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");

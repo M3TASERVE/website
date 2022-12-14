@@ -1,6 +1,6 @@
 {
-    "name": "LocalStack",
-    "short_name": "LocalStack",
+    "name": "m3taserve",
+    "short_name": "m3taserve",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
