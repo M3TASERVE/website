@@ -1,7 +1,7 @@
 
 {{ define "main" }} 
 
-<section class="section section-sm" x-data="user()" x-init="login = window.location.pathname.replaceAll('/','') == 'signin'">
+<section class="section section-sm" x-data="user()">
 <div class="container mt-2 mb-2 d-flex justify-content-center">
   
     <div class="overlay-cardX col-5 mt-6">
@@ -18,11 +18,11 @@
         </ul>
         -->
 
-      <div class="col-12 tab-content text-center">
+      <div class="col-10 tab-content text-center">
         
         <div style="height: 60px;"><a href="/"><img src="/images/m3taserve.svg" height="33px" alt="Logo" style="margin-bottom: -10px;"></img></a></div>
         
-        <template x-if="login">
+        <template x-if="window.location.pathname.replaceAll('/','') == 'signin'">
         <div>
           <h1>Log In</h1>
           <p>Enter your email address and password.</p>                  
@@ -44,7 +44,7 @@
   
               <div class="row form-group mt-4">
                 <div class="mt-2 mb-2 text-sm leading-5">
-                  <a @click="reset()" href="#" class="font-medium">Forgot your password?</a>
+                  <a href="/reset" class="font-medium">Forgot your password?</a>
                 </div>
               </div>
 
@@ -54,17 +54,38 @@
                 </div>
               </div>
 
+              <template x-if="form.validation.successMessage.length > 0">
+              <div class="row justify-content-md-center">
+                <div class="mt-4 col-6">
+                  <div class="d-flex align-items-center" role="alert" style="height: 12px;">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    <div style="text-align: left; font-size: 14px; padding: 5px;" x-text="form.validation.successMessage"></div>
+                  </div>
+                </div>
+              </div>
+              </template>
+              <template x-if="form.validation.errorMessage.length > 0">
+              <div class="row justify-content-md-center">
+                <div class="mt-4 col-10">
+                  <div class="d-flex align-items-center" role="alert" style="height: 12px; padding-left: 10px;">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div style="text-align: left; font-size: 14px; padding: 5px;" x-text="form.validation.errorMessage"></div>
+                  </div>
+                </div>
+              </div>              
+              </template>
+
               <div class="row form-group mt-4">
                 <div class="mt-2 text-sm leading-5">
                   Don’t have an account yet?
-                  <a href="/signup" class="">Sign up</a>             
+                  <a href="/signup" class="font-medium">Sign up</a>             
                 </div>
               </div>
 
           </div>
         </div>
         </template>
-        <template x-if="!login">
+        <template x-if="window.location.pathname.replaceAll('/','') == 'signup'">
         <div> 
           <h1>Create an account</h1>
           <p>Sign up with your email and a password.</p>
@@ -100,6 +121,29 @@
             </div>
         </div>
         </template>
+        <template x-if="window.location.pathname.replaceAll('/','') == 'reset'">
+          <div> 
+            <h1>Reset password</h1>
+            <p>Enter your email address and we will send you a password reset link.</p>
+            <div style="margin-top: 10px;">
+    
+                <div class="row form-group gy-1 gy-md-3 mb-3">
+                  <div class="col-12">
+                    <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email.value"/>
+                    <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.email.errorMessage"></div>
+                  </div>
+                </div>
+                
+                <div class="row form-group">
+                  <div class="mt-2 text-sm leading-5">
+                    <button class="btn btn-primary btn-tertiary btn-lg btn-block" @click="submit('reset')">Send</button>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </template>
+
 <!--
           <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <form style="margin-top: 10px;">

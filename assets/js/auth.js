@@ -34,7 +34,8 @@ Alpine.data('user', () => ({
     msg: "",
     form: {
         email: { value: "", errorMessage: "" },
-        password: { value: "", errorMessage: "" }        
+        password: { value: "", errorMessage: "" },
+        validation: { successMessage: "", errorMessage: "" }
     },
     submission: {
         network: '',
@@ -48,14 +49,25 @@ Alpine.data('user', () => ({
         let flag = true;
         var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if (this.form.email.value.length == 0 || !this.form.email.value.match(validRegex)) { this.form.email.errorMessage = "Please enter a valid email."; flag = false; } else { this.form.email.errorMessage = ""; }
-        if (this.form.password.value.length < 10 ) { this.form.password.errorMessage = "Password length must be at least 10 characters."; flag = false; } else { this.form.password.errorMessage = ""; }
-        if (flag) { if (submitType == 'signin') this.signin(); else this.signup(); }
+        if (submitType != 'reset' && this.form.password.value.length < 10 ) { this.form.password.errorMessage = "Password length must be at least 10 characters."; flag = false; } else { this.form.password.errorMessage = ""; }
+        if (flag) { if (submitType == 'signin') this.signin(); else if (submitType == 'signup') this.signup(); else if (submitType == 'reset') this.reset(); }
     },
     signin() {
-        var self = this;        
+        var self = this;    
+        self.form.validation.errorMessage = "";
+        self.form.validation.successMessage = "";
         supabase.auth
         .signIn({ email: self.form.email.value, password: self.form.password.value })
-        .then((response) => { handleResponse(this, response); })
+        .then((response) => {
+            if (response.error) { 
+                console.log(response.error.message);
+                self.form.validation.errorMessage = "We were unable to verify your credentials";
+            } else { 
+                console.log(response);
+                self.form.validation.successMessage = "Login success !";
+                setTimeout(() => { window.location="/"; }, 2000);
+            }
+        })
         .catch((err) => { handleError(this, err); });
     },
     signup() {
@@ -73,7 +85,7 @@ Alpine.data('user', () => ({
     reset() {
         var self = this;
         supabase.auth.api
-        .resetPasswordForEmail({ email: self.form.email })
+        .resetPasswordForEmail(self.form.email.value)
         .then((response) => { handleResponse(this, response); })
         .catch((err) => { handleError(this, err); });
     },
