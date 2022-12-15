@@ -5,7 +5,7 @@ slug: "lesson8"
 number: 8
 menu:
   courses:
-    parent: "Course 1"
+    parent: "101-blockchain"
 weight: 18
 toc: true
 type: quizz

@@ -7,7 +7,7 @@ summary: "quick summary"
 number: 1
 menu:
   courses:
-    parent: "Course 1"
+    parent: "101-blockchain"
 weight: 11
 toc: true
 ---

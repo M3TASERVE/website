@@ -1,0 +1,16 @@
+{
+    "entries": [
+    { "title": "Does the EVM run on specialized hardware ?", 
+    "answers": [ "yes", "no" ] },
+    { "title": "Does the EVM support infinite recursion ?", 
+    "answers": [ "yes", "no" ] },
+    { "title": "Does the EVM defines the same rules of computation for states from block to block ?", 
+    "answers": [ "yes", "no" ] },
+    { "title": "Does Remix allow you to code with another language than Solidity ?", 
+    "answers": [ "yes", "no" ] },
+    { "title": "Does Remix allow you to interact with contracts you did not deploy ?", 
+    "answers": [ "yes", "no" ] },
+    { "title": "Can MetaMask and Remix connect with your local blockchain ?", 
+    "answers": [ "yes", "no" ] }
+    ]
+}

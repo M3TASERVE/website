@@ -5,7 +5,7 @@ slug: "lesson5"
 number: 5
 menu:
   courses:
-    parent: "Course 2"
+    parent: "101-solidity"
 weight: 25
 toc: true
 ---

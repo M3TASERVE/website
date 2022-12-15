@@ -5,7 +5,7 @@ slug: "lesson7"
 number: 7
 menu:
   courses:
-    parent: "Course 1"
+    parent: "101-blockchain"
 weight: 17
 toc: true
 ---
