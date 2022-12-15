@@ -2,11 +2,11 @@
 # Meta Data for SEO
 
 ## Homepage
-title = "m3taserve"
+title = "M3TASERVE"
 logo = "/images/m3taserve.svg"
 titleSeparator = "-"
-titleAddition = "A fully functional local cloud stack"
-description = "Develop and test your cloud apps offline"
+titleAddition = "Become a Web3 dev, land your next job!"
+description = "M3TASERVE is the Web3 education academy for developers, by developers"
 
 ## Open Graph + Twitter Cards
 images = ["/images/og-preview-image.png", "/images/header-logo.svg"]
