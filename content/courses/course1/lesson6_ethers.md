@@ -40,23 +40,23 @@ The INFURA service has been around for quite some time and is very robust and re
 
 First, we have to [register](https://infura.io/register) on Infura.
 
-<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_1.png"></img>
+<img class="medium-image" src="/wp-content/uploads/2022/06/infura_1.png"></img>
 
 Then, you should receive an email that ask you to confirm the email address. After confirmation, you will be able to finalize your registration.
 
-<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_2.png"></img>
+<img class="medium-image" src="/wp-content/uploads/2022/06/infura_2.png"></img>
 
 Then you have to create a project for our tests.
 
-<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_3.png"></img>
+<img class="medium-image" src="/wp-content/uploads/2022/06/infura_3.png"></img>
 
 In the end, you will be able to acccess the Infura dashboard of your project.
 
-<img style="width: 600px;" src="/wp-content/uploads/2022/06/infura_4.png"></img>
+<img class="medium-image" src="/wp-content/uploads/2022/06/infura_4.png"></img>
 
 In the settings panel, you can get your Project ID. We will need it in the sequel.
 
-<img style="width: 500px;" src="/wp-content/uploads/2022/06/infura_5.png"></img>
+<img class="medium-image" src="/wp-content/uploads/2022/06/infura_5.png"></img>
 
 Now that we have an Infura account, we will reuse ethers.js, use it to connect to a web3 provider, and get information from the Ethereum network.
 For our tests, we will use a testnet named Ropsten.
