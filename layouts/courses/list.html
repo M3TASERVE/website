@@ -1,26 +1,31 @@
 {{ define "main" }}
 <div class="row justify-content-center">
-  <div class="col-md-12 col-lg-10 col-xl-8">
+  <div class="col-md-10 col-lg-10 col-xl-8">
     <article x-data="user()" x-init="retrieve()">
 
-	<table class="mt-6" style="border-color: transparent;">
+	<table class="mt-8" style="border-color: transparent; max-width: 80%;">
 		<tr style="text-align: left; vertical-align: top;">
 		{{ $currentPage := . }}
 		{{- range .Site.Menus.courses -}}
 		{{ $currentCourse := .Name }}
-		<td style="width: 200px; margin-right: 20px;">
-		<ul>
-			<h4>{{ .Name }}</h4>
-			{{ range where $currentPage.Site.RegularPages.ByWeight "Section" "courses" }}
-			{{ if eq .Params.menu.courses.parent $currentCourse }}
-			<li style="list-style: none;" class="pe-6">
-				<a href="{{ .RelPermalink }}">{{ .Params.title | title }}</a>				
-				<template x-if="loaded && progression[{{ .Params.weight }}]"><span class="float-end">✔️</span></template>
-				<template x-if="loaded && !progression[{{ .Params.weight }}]"><span class="float-end">❌</span></template>
-			</li>
-			{{ end }}
-			{{ end }}
-		</ul>
+		<td>
+
+			<div class="course-card">
+				<h3><a href="/courses/course1/lesson1/" class="stretched-link primary text-secondary">{{ .Name }}</a></h3>
+				<div class="divider"></div>
+				<ul class="mt-4">
+				{{ range where $currentPage.Site.RegularPages.ByWeight "Section" "courses" }}
+				{{ if eq .Params.menu.courses.parent $currentCourse }}
+				<li style="list-style: none;" class="pe-6">
+					<a href="{{ .RelPermalink }}">{{ .Params.title | title }}</a>				
+					<template x-if="loaded && progression[{{ .Params.weight }}]"><span class="float-end">✔️</span></template>
+					<template x-if="loaded && !progression[{{ .Params.weight }}]"><span class="float-end">❌</span></template>
+				</li>
+				{{ end }}
+				{{ end }}
+				</ul>
+			</div>
+
 		</td>
 		{{ end }}
 		</tr>

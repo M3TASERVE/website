@@ -104,13 +104,10 @@ button.btn:focus {
 }
 */
 
-body {
-  // padding-top: 3.5625rem;
-}
 
 .docs-sidebar {
   order: 2;
-  min-width: 400px;
+  /* min-width: 400px; */
 }
 
 @include media-breakpoint-up(lg) {
@@ -160,7 +157,7 @@ body {
 
 .docs-toc {
   order: 2;
-  min-width: 200px;
+  /* min-width: 200px; */
 }
 
 @supports ((position:-webkit-sticky) or (position:sticky)) {
@@ -175,7 +172,7 @@ body {
 
 .docs-content {
   padding: 0px 50px 30px 50px;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   order: 1;
   text-align: justify;
 }
