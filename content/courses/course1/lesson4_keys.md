@@ -5,7 +5,7 @@ slug: "lesson4"
 number: 4
 menu:
   courses:
-    parent: "Course 1"
+    parent: "101-blockchain"
 weight: 14
 toc: true
 ---
@@ -140,12 +140,14 @@ While signing in to any platform on the internet, you need to authenticate using
 **How an Ethereum address is generated?**
 
 A random private key of 64 characters (256 bits / 32 bytes) is generated first. 
+
 _For example: 0xf4a2b939592564feb35ab10a8e04f6f2fe0943579fb3c9c33505298978b74893_
 
 A 128 (hex) character (64 bytes) public key is then derived from the generated private key using [Elliptic Curve Digital Signature Algorithm (ECDSA)](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm) 📚 and the X and Y coordinates of the corresponing point are concatenated and shown as hex.
 <div class="large-text" title="0x04345f1a86ebf24a6dbeff80f6a2a574d46efaa3ad3988de94aa68b695f09db9ddca37439f99548da0a1fe4acf4721a945a599a5d789c18a06b20349e803fdbbe3">For  example: 0x04345f1a86ebf24a6dbeff80f6a2a574d46efaa3ad3988de94aa68b695f09db9ddca37439f99548da0a1fe4acf4721a945a599a5d789c18a06b20349e803fdbbe3</div>
 
 The [Keccak-256](https://fr.wikipedia.org/wiki/SHA-3) 📚 hash function is then applied to (128 characters / 64 bytes) the public key to obtain a 64 character (32 bytes) hash string. The last 40 characters / 20 bytes of this string prefixed with 0x become the final Ethereum address.
+
 _For example: 0xd5e099c71b797516c10ed0f0d895f429c278_
 
 Note: 0x in prefix indicates that the number/string is written in hex.
