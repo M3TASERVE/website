@@ -1,8 +1,8 @@
 - logo: /images/customers/sandbox.svg
   url: "https://www.sandbox.game"
-- logo: /images/customers/tbg.svg
-  url: "https://www.theblockchain-group.com"
 - logo: /images/customers/eniblock.svg
   url: "https://www.eniblock.com"
-- logo: /images/customers/bountysource.svg
-  url: "https://www.bountysource.com"
+- logo: /images/customers/sandbox.svg
+  url: "https://www.sandbox.game"
+- logo: /images/customers/eniblock.svg
+  url: "https://www.eniblock.com"
