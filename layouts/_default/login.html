@@ -30,14 +30,14 @@
 
               <div class="row form-group gy-1 gy-md-3 mb-3 has-validation">
                 <div class="col-12">
-                  <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email.value"/>
+                  <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email.value"  @keyup.enter="submit('signin')"/>
                   <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.email.errorMessage"></div>
                 </div>
               </div>
               
               <div class="row form-group gy-1 gy-md-3 mb-3">
                 <div class="col-12">
-                  <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.password.value"/>
+                  <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.password.value" @keyup.enter="submit('signin')"/>
                   <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.password.errorMessage"></div>
                 </div>
               </div>
@@ -105,12 +105,30 @@
                 </div>
               </div>
 
+              <div class="row form-group gy-1 gy-md-3 mb-3">
+                <div class="col-12">
+                  <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.passwordConfirm.value" @keyup.enter="submit('signup')"/>
+                  <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.passwordConfirm.errorMessage"></div>
+                </div>
+              </div>
+
               <div class="row form-group">
                 <div class="mt-2 text-sm leading-5">
                   <button class="btn btn-primary btn-tertiary btn-lg btn-block" @click="submit('signup')">Sign Up</button>
                 </div>
               </div>
 
+              <template x-if="form.validation.successMessage.length > 0">
+                <div class="row justify-content-md-center">
+                  <div class="mt-4 col-6">
+                    <div class="d-flex align-items-center" role="alert" style="height: 12px;">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                      <div style="text-align: left; font-size: 14px; padding: 5px;" x-text="form.validation.successMessage"></div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+              
               <div class="row form-group mt-4">
                 <div class="mt-2 text-sm leading-5">
                   Already have an account?
@@ -129,7 +147,7 @@
     
                 <div class="row form-group gy-1 gy-md-3 mb-3">
                   <div class="col-12">
-                    <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email.value"/>
+                    <input type="email" class="contact-textbox" placeholder="Email" required x-model="form.email.value" @keyup.enter="submit('reset')"/>
                     <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.email.errorMessage"></div>
                   </div>
                 </div>
@@ -140,11 +158,63 @@
                   </div>
                 </div>
 
+                <template x-if="form.validation.successMessage.length > 0">
+                  <div class="row justify-content-md-center">
+                    <div class="mt-4 col-6">
+                      <div class="d-flex align-items-center" role="alert" style="height: 12px;">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                        <div style="text-align: left; font-size: 14px; padding: 5px;" x-text="form.validation.successMessage"></div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                
             </div>
           </div>
         </template>
+      </template>
+      <template x-if="window.location.pathname.replaceAll('/','') == 'password'">
+        <div> 
+          <h1>Reset password</h1>
+          <p>Enter your new password.</p>
+          <div style="margin-top: 10px;">
+  
+            <div class="row form-group gy-1 gy-md-3 mb-3">
+              <div class="col-12">
+                <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.password.value"/>
+                <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.password.errorMessage"></div>
+              </div>
+            </div>
 
-<!--
+            <div class="row form-group gy-1 gy-md-3 mb-3">
+              <div class="col-12">
+                <input type="password" class="contact-textbox" placeholder="Password" required x-model="form.passwordConfirm.value" @keyup.enter="submit('password')"/>
+                <div style="text-align: left; font-size: 12px; padding: 5px;" x-text="form.passwordConfirm.errorMessage"></div>
+              </div>
+            </div>
+                        
+            <div class="row form-group">
+              <div class="mt-2 text-sm leading-5">
+                <button class="btn btn-primary btn-tertiary btn-lg btn-block" @click="submit('password')">Reset password</button>
+              </div>
+            </div>
+            
+            <template x-if="form.validation.successMessage.length > 0">
+              <div class="row justify-content-md-center">
+                <div class="mt-4 col-6">
+                  <div class="d-flex align-items-center" role="alert" style="height: 12px;">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    <div style="text-align: left; font-size: 14px; padding: 5px;" x-text="form.validation.successMessage"></div>
+                  </div>
+                </div>
+              </div>
+            </template>
+
+          </div>
+        </div>
+      </template>
+
+      <!--
           <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <form style="margin-top: 10px;">
 
