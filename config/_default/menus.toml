@@ -54,8 +54,3 @@
   name = "Terms of Service"
   url = "/terms"
   weight = 20
-
-[[footerend]]
-  name = "Imprint"
-  url = "#"
-  weight = 30
