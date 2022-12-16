@@ -48,7 +48,7 @@ Alpine.data('user', () => ({
     submit: function (submitType) {
         let flag = true;
         var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (this.form.email.value.length == 0 || !this.form.email.value.match(validRegex)) { this.form.email.errorMessage = "Please enter a valid email."; flag = false; } else { this.form.email.errorMessage = ""; }
+        if (submitType != 'password' && (this.form.email.value.length == 0 || !this.form.email.value.match(validRegex))) { this.form.email.errorMessage = "Please enter a valid email."; flag = false; } else { this.form.email.errorMessage = ""; }
         if (submitType == 'signup' && this.form.password.value != this.form.passwordConfirm.value) { this.form.passwordConfirm.errorMessage = "Passwords are different."; flag = false; } else { this.form.passwordConfirm.errorMessage = ""; }
         if (submitType != 'reset' && this.form.password.value.length < 10) { this.form.password.errorMessage = "Password length must be at least 10 characters."; flag = false; } else { this.form.password.errorMessage = ""; }
         if (flag) { if (submitType == 'signin') this.signin(); else if (submitType == 'signup') this.signup(); else if (submitType == 'reset') this.reset(); else if (submitType == 'password') this.password(); }

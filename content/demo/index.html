@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>m3taserve</title>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    <link href="/main.css" rel="stylesheet"/>
+    <style type="text/css">
+    .loader { border: 16px solid #f3f3f3; border-top: 16px solid #6c757d; border-radius: 50%; width: 220px; height: 220px; animation: spin 2s linear infinite; display: block; margin: auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-button { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-thumb { background: #515151; border: 0px none #ffffff; border-radius: 50px; }
+    ::-webkit-scrollbar-thumb:hover { background: #464646; }
+    ::-webkit-scrollbar-thumb:active { background: #202020; }
+    ::-webkit-scrollbar-track { background: rgba(100,100,100,.1); border: 0px none #ffffff; border-radius: 50px; }
+    ::-webkit-scrollbar-track:hover { background: rgba(100,100,100,.5); }
+    ::-webkit-scrollbar-track:active { background: rgba(100,100,100,.5); }
+    ::-webkit-scrollbar-corner { background: transparent;}
+    .box { padding: 0px; border: 1px solid gray; border-radius: 20px; }
+    .box-header { padding: 10px 20px 0px 20px; border-bottom: 1px solid gray; }
+    .box-content { padding: 20px; }
+    [v-cloak] { display: none; }
+    </style>
+  </head>
+  <body>
+    <div class="col-lg-8 mx-auto p-3 py-md-5" id="app" v-cloak>
+      <header class="pb-3 mb-5 box-header">
+        <a class="text-dark text-decoration-none"><span class="fs-4">{{ title }}</span></a>
+        <a class="text-dark text-decoration-none"><span class="badge bg-secondary float-md-end mt-2">Network {{ $filters.formatNetwork(network) }}</span></a>
+      </header>
+      <main>
+        <div id="loader" class="loader" v-if="status.loading"></div>
+        <loader-account-box :status="status" :account="account" v-if="!status.loading && !status.initialized"></loader-account-box>
+        <loader-contract-box :status="status" :contract="contract" :network="network" v-if="status.connected && !status.loading && !status.initialized"></loader-contract-box>
+        <div class="container px-4" v-if="status.connected && !status.loading && status.initialized && contract.name == 'vote'">
+          <div class="row justify-content-around">
+            <div class="col-md-3 box">
+              <vote-box :account="account" :contract="contract"></vote-box>
+            </div>
+            <div class="col-md-8 box">
+              <vote-results :contract="contract"></vote-results>
+            </div>
+          </div>
+          <div class="row justify-content-md-center mt-4">
+            <global-informations :contract="contract"></global-informations>
+          </div>
+        </div>
+        <div class="container px-4" v-if="status.connected && !status.loading && status.initialized && contract.name == 'crowdfunding'">
+          <div class="row justify-content-around">
+            <div class="col-md-3 box">
+              <crowdfunding-box :account="account" :contract="contract"></crowdfunding-box>
+            </div>
+            <div class="col-md-8 box">
+              <crowdfunding-results :contract="contract"></crowdfunding-results>
+            </div>
+          </div>
+          <div class="row justify-content-md-center mt-4">
+            <global-informations :contract="contract"></global-informations>
+          </div>
+        </div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <strong class="me-auto">Event</strong>
+              <small></small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              {{ tx }}
+            </div>
+          </div>
+        </div>
+        <info-modal :contract="contract"></info-modal>
+      </main>
+    </div>    
+    <script src="/js/vendor/vue.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/ethers.js"></script>
+    <script type="application/javascript">    
+    const lastContractAddress = localStorage.getItem('contract') ? localStorage.getItem('contract') : "";
+    const lastContractName = localStorage.getItem('contractName') ? localStorage.getItem('contractName') : "vote";
+    const callProvider = new ethers.providers.Web3Provider(window.ethereum); //new ethers.providers.JsonRpcProvider("http://localhost:8545");
+    const transactProvider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = transactProvider.getSigner();
+    const mixin = {
+      methods: {
+        copyToClipboard(address) { 
+          var tmp = document.createElement('input');
+          document.body.appendChild(tmp);
+          tmp.value = address;
+          tmp.focus();
+          tmp.select();
+          document.execCommand("copy");
+          tmp.remove();
+          var tooltip = new bootstrap.Tooltip(document.getElementById("addressButton"))
+          tooltip.enable();
+          tooltip.show();
+          tooltip.disable();
+        }
+      }
+    };
+    const app = Vue.createApp({     
+      data() {
+        return {
+          title: "Connect",
+          tx: "",
+          status: {
+            connected: false,
+            initialized: false,
+            loading: false,
+          },
+          network: {
+            name: "",
+            chainId: ""
+          },
+          account: {
+            address: "0x0",
+          },
+          contract: {
+            address: lastContractAddress,
+            name: lastContractName,
+            names: ["vote", "crowdfunding"],
+            abi: null,
+            participants: [],
+            creator: "0x0",
+            closed: false,
+            start: "",
+            end: "",
+            vote: {
+              title: "🗳️ Ballot Box DApp",
+              address: "0x84863736b49fCB38ACed0B0dbE2Cda9d31975a44", // gorli testnet
+              abi: [
+                "function creator() view returns (address)",
+                "function start() view returns (uint)",
+                "function end() view returns (uint)",
+                "function closed() view returns (bool)",
+                "function metadata() view returns (string)",
+                "function choices(uint256) view returns (bytes32, uint256)",
+                "function getChoicesCount() view returns (uint)",
+                "function voters(uint256) view returns (address)",
+                "function getVotersCount() view returns (uint)",
+                "function votes(address) view returns (uint256, bool, uint256)",
+                "function votesCount() view returns (uint)",
+                "function vote(uint)",
+                "function cancel()",
+                "event Voted(uint256 choice)",
+                "event Canceled()",
+                "event Closed()"
+              ],
+              defaultChoices: [ "For", "Against", "Abstain" ],            
+              choices: [],
+              choiceLabels: {},
+              voters: [],
+              votes: {},
+              votesCount: 0,
+              metadata: "",
+              init: async function(self) {
+                self.title = self.contract.vote.title;
+                self.contract.abi = self.contract.vote.abi;
+                var contract = new ethers.Contract(self.contract.address, self.contract.abi, callProvider);
+
+                try {
+                  self.contract.creator = await contract.creator();
+                  self.contract.closed = await contract.closed();
+                  self.contract.start = await contract.start();
+                  self.contract.end = await contract.end();
+
+                  var votersCount = await contract.getVotersCount();
+                  for (var i = 0; i < votersCount; i++) {
+                    self.contract.participants.push(await contract.voters(i));                
+                  }
+
+                  var choicesCount = await contract.getChoicesCount();
+                  self.contract.vote.defaultChoices.forEach(choice => { self.contract.vote.choiceLabels[ethers.utils.sha256(ethers.utils.toUtf8Bytes(choice))] = choice; });
+                  for (var i = 0; i < choicesCount; i++) {
+                    var choice = await contract.choices(i);
+                    self.contract.vote.choices.push({ hash: choice[0], label: self.contract.vote.choiceLabels[choice[0]] });
+                    self.contract.vote.votes[choice[0]] = Math.round(parseInt(choice[1]) / votersCount * 100);                
+                  }
+                  self.contract.vote.votesCount = await contract.votesCount();
+                  self.contract.vote.metadata = await contract.metadata();
+
+                  var filterFrom = contract.filters.Closed(), blockNumber = await callProvider.getBlockNumber();
+                  contract.on({ filterFrom }, (event) => { if (event.blockNumber > blockNumber) { console.log(event); location.reload(); } });
+
+                } catch(err) {
+                  console.error(err);
+                  self.tx = err.data ? err.data.message : err.message; 
+                }
+              }
+            },
+            crowdfunding: {
+              title: "🗳️ Crowdfunding DApp",
+              abi: [
+                "function creator() view returns (address)",
+                "function start() view returns (uint)",
+                "function end() view returns (uint)",
+                "function closed() view returns (bool)",
+                "function cap() view returns (uint)",
+                "function token() view returns (address)",
+                "function totalAmount() view returns (uint)",
+                "function depositsOf(address participant) public view returns (uint256)",
+                "function amountRaised() public view returns (uint256)",
+                "function participate(uint256 amount) public",
+                "function close() public",
+                "function cancel() public",
+                "function withdraw() public",
+                "event Deposited(address indexed participant, uint256 amount)",
+                "event Withdrawn(address indexed participant, uint256 amount)",
+                "event Canceled()",
+                "event Closed()"
+              ],
+              erc20: [
+                "function totalSupply() external view returns (uint256)",
+                "function balanceOf(address account) external view returns (uint256)",
+                "function transfer(address to, uint256 amount) external returns (bool)",
+                "function allowance(address owner, address spender) external view returns (uint256)",
+                "function approve(address spender, uint256 amount) external returns (bool)",
+                "function transferFrom(address from, address to, uint256 amount) external returns (bool)",
+                "event Transfer(address indexed from, address indexed to, uint256 value)",
+                "event Approval(address indexed owner, address indexed spender, uint256 value)"
+              ],
+              raised: 0,
+              cap: 0,
+              token: "",
+              //allowed: false,
+              symbol: "OT",
+              init: async function(self) {
+                self.title = self.contract.crowdfunding.title;
+                self.contract.abi = self.contract.crowdfunding.abi;
+                var contract = new ethers.Contract(self.contract.address, self.contract.abi, callProvider);
+
+                try {
+                  self.contract.creator = await contract.creator();
+                  self.contract.start = await contract.start();
+                  self.contract.end = await contract.end();
+                  self.contract.closed = await contract.closed();
+
+                  var raised = ethers.utils.formatEther(await contract.amountRaised());
+                  var cap = await contract.cap();
+                  var progress = raised / cap * 100;
+                  self.contract.crowdfunding.raised = raised.toString();
+                  self.contract.crowdfunding.cap = cap.toString();
+                  self.contract.crowdfunding.progress = progress.toString(); console.log(self.contract.crowdfunding.progress)
+                  
+                  self.contract.crowdfunding.token = await contract.token();
+                  //self.contract.crowdfunding.allowed = await token.allowance(); // TODO; add ERC20 ABI
+
+                  var filterFrom = contract.filters.Deposited(), blockNumber = await callProvider.getBlockNumber();
+                  contract.on({ filterFrom }, (event) => { if (event.blockNumber > blockNumber) { console.log(event); location.reload(); } });
+
+                } catch(err) {
+                  console.error(err);
+                  self.tx = err.data ? err.data.message : err.message; 
+                }
+              }
+            }
+          }
+        };
+      },
+      mixins: [mixin],
+      methods: {
+        async init() {
+          var self = this;
+          try {
+            window.ethereum.on('accountsChanged', function (accounts) {
+              console.log(accounts);
+              location.reload();
+            })
+            self.network = await transactProvider.getNetwork();
+            if (self.network.chainId == 1337) { self.network.name = "dev chain"; }
+            self.account.address = await signer.getAddress();            
+            self.status.connected = true;
+          } catch(err) {
+            self.status.connected = false;
+          }
+        },
+        async load() {
+          var self = this;
+          try {
+            await self.contract[self.contract.name].init(self);
+            callProvider.on({ address: self.contract.address }, (event) => { console.log(event); });
+            self.status.loading = false;
+          } catch(err) { 
+            console.error(err);
+          }
+        },       
+      },
+      mounted () {
+        this.init();
+      },
+      watch: {
+        'status.initialized'(newValue, oldValue) {
+          if (newValue) {
+            this.load();
+          }
+        },
+        'tx'(newValue, oldValue) {
+          if (newValue) {
+            const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+            toast.show();
+          }
+        }
+      }
+    });
+    app.component('loader-account-box', {
+      props: ['status', 'account'],
+      template:`
+      <div class="container px-4 mb-4">
+        <div class="row justify-content-around">
+          <div class="col-md-6 box">
+            <div class="box-header">
+              <h2>Account</h2>
+            </div>
+            <div class="box-content" v-if="!status.connected">
+              <button class="btn btn-secondary" type="button" @click="connect()">Connect wallet</button>
+            </div>
+            <div class="d-flex justify-content-around" v-if="status.connected">
+              <account-avatar :account="account"></account-avatar>
+            </div>
+          </div>
+        </div>
+      </div>
+      `,
+      methods: {
+        async connect() {
+          var self = this;
+          await transactProvider.send("eth_requestAccounts", []);
+          self.account.address = await signer.getAddress();
+          console.log(self.account.address);
+          self.status.connected = true;
+        }  
+      }
+    })
+    app.component('loader-contract-box', {
+      props: ['status', 'network', 'contract'],
+      template:`
+      <div class="container px-4">
+        <div class="row justify-content-around">
+          <div class="col-md-6 box">
+            <div class="box-header">
+              <h2>Contract</h2>
+            </div>
+            <div class="box-content">
+              <div class="input-group mb-3">
+                <label style="margin-right: 20px;">ABI </label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="contract.name" style="max-width: 160px; border-radius: 10px;">
+                  <option v-for="name in contract.names" v-bind:value="name">{{ name }}</option>
+                </select>
+                <span style="margin-left: 10px; padding: 5px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modal"> ℹ️ </span>
+              </div>
+              <div class="input-group mb-3">
+                <label style="margin-right: 20px;">Address </label>
+                <input type="text" class="form-control" v-model="contract.address" aria-describedby="basic-addon2" style="font-size: 11px; border-radius: 10px; border: 1px solid lightGray !important; margin-right: 10px;"/>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" @click="load()">Load</button>
+                </div>
+              </div>            
+            </div>
+          </div>
+        </div>
+      </div>
+      `,
+      methods: {
+        async load() {
+          var self = this;
+          if (self.contract.address.length > 0) {
+            localStorage.setItem('contract', self.contract.address);
+            localStorage.setItem('contractName', self.contract.name);
+            self.status.initialized = true;
+            self.status.loading = true;
+          }
+        },
+      }
+    })
+    app.component('vote-box', {
+      props: ['account', 'contract'],
+      data() { return { selectedChoice: 0 }; },
+      template:`      
+      <div class="">
+        <div class="box-header">
+          <h2>Account</h2>
+        </div>
+        <div class="box-content">
+          <account-avatar :account="account"></account-avatar>
+          <div v-if="!contract.closed">
+            <div><label class="form-label">Select a choice</label></div>
+            <div class="row g-2">
+              <div class="col-8">
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="selectedChoice">
+                  <option v-for="(choice, i) in contract.vote.choices" v-bind:value="i">{{ choice.label }}</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-secondary mb-3" style="margin-top: -4px;" @click="sendVote()">Vote</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      `,
+      methods: {
+        async sendVote() {          
+          var self = this;
+          if ((self.selectedChoice.toString()).length > 0) {
+            try {
+              let contractWithSigner = (new ethers.Contract(self.contract.address, self.contract.abi, callProvider)).connect(signer);
+              let transaction = await contractWithSigner.vote(self.selectedChoice);
+              await transaction.wait();
+              console.log(transaction);
+              self.tx = transaction;
+            } catch (err) {
+              console.error(err);
+              self.tx = err.data ? err.data.message : err.message; 
+            }
+          }
+        },
+      }
+    })           
+    app.component('vote-results', {
+      props: ['contract'],
+      template:`
+      <div class="">
+        <div class="box-header">
+          <h2 class="d-flex justify-content-between align-items-center">{{ contract.vote.metadata }} <span class="badge bg-secondary rounded-circle">{{ contract.vote.votesCount }}</span></h2>
+        </div>
+        <div class="box-content" style="padding: 0px; min-width: 400px;">
+          <table class="table" style="height: 50px;">
+            <tbody>
+              <tr v-for="choice in contract.vote.choices">
+                <td>
+                  <div style="padding-left: 10px;">
+                    <label>{{ choice.label }}</label>
+                    <div class="progress" style="width: 300px;">
+                      <div class="progress-bar bg-secondary" role="progressbar"  :style="{ 'width': contract.vote.votes[choice.hash]+'%' }" :aria-valuenow="contract.vote.votes[choice.hash]" aria-valuemin="0" aria-valuemax="100">{{ contract.vote.votes[choice.hash] + '%' }}</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>         
+        </div>
+      </div>
+      `
+    })
+    app.component('crowdfunding-box', {
+      props: ['account', 'contract'],
+      data() { return { amount: "1" }; },
+      template:`
+      <div class="">
+        <div class="box-header">
+          <h2>Account</h2>
+        </div>
+        <div class="box-content">
+          <div class="d-flex justify-content-around">
+            <account-avatar :account="account"></account-avatar>
+          </div>
+          <div v-if="!contract.closed">
+            <div><label class="form-label">Amount</label></div>
+            <div class="row g-2">
+              <div class="col-8">
+                <input type="text" class="form-control" v-model="amount" aria-describedby="basic-addon2" style="font-size: 11px;"/>
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-secondary mb-3" style="margin-top: -4px;" @click="sendParticipation()">Participate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      `,
+      methods: {
+        async sendParticipation() { // TODO split in two functions
+          var self = this;
+          if ((self.amount.toString()).length > 0) {
+            var amount = ethers.utils.parseEther(self.amount);
+            try {
+              let contractWithSigner = (new ethers.Contract(self.contract.crowdfunding.token, self.contract.crowdfunding.erc20, callProvider)).connect(signer);
+              let transaction = await contractWithSigner.approve(self.contract.address, amount);
+              await transaction.wait();
+              console.log(transaction);
+              self.tx = transaction; 
+            } catch (err) {
+              console.error(err);
+              self.tx = err.data ? err.data.message : err.message; 
+            }
+            try {
+              let contractWithSigner = (new ethers.Contract(self.contract.address, self.contract.abi, callProvider)).connect(signer);
+              transaction = await contractWithSigner.participate(amount);
+              await transaction.wait();
+              console.log(transaction);
+              self.tx = transaction; 
+            } catch (err) {
+              console.error(err);
+              self.tx = err.data ? err.data.message : err.message; 
+            }
+            const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+            toast.show();
+          }
+        },
+      }
+    })           
+    app.component('crowdfunding-results', {
+      props: ['contract'],
+      template:`
+      <div class="">
+        <div class="box-header">
+          <h2 class="d-flex justify-content-between align-items-center">Goal <span class="">{{ contract.crowdfunding.cap }} {{ contract.crowdfunding.symbol }}</span></h2>
+        </div>
+        <div class="box-content" style="padding: 0px; min-width: 400px;">
+          <table class="table" style="height: 50px;">
+            <tbody>
+              <tr>
+                <td>
+                  <div style="padding-left: 10px;">
+                    <label>Token raised</label>
+                    <div class="progress" style="width: 300px;">
+                      <div class="progress-bar bg-secondary" role="progressbar"  :style="{ 'width': contract.crowdfunding.progress+'%' }" :aria-valuenow="contract.crowdfunding.raised" aria-valuemin="0" aria-valuemax="100">{{ contract.crowdfunding.raised }}</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>         
+        </div>
+      </div>
+      `
+    })
+    app.component('account-avatar', {
+      props: ['account'],
+      mixins: [mixin],
+      template:`
+      <ul class="icon-list ps-0" style="margin-top: 10px;">
+        <li class="d-flex align-items-start mb-1">
+          <img :src="$filters.formatUrl(account.address, 64)" class="rounded-circle" style="margin: auto;" />
+        </li>
+        <li class="d-flex align-items-start mb-1 text-muted box" style="min-width: 180px; max-width: 180px;">
+          <input ref="address" v-on:focus="$event.target.select()" :value="$filters.formatAddress(account.address, 6)" style="width: 150px; height: 20px; padding-left: 10px; margin: 2px 0px 0px 4px; overflow: hidden; border: none; font-size: 12px;" disabled readonly />
+          <div id="addressButton" title="Copied!" style="float: right; cursor: pointer;" @click="copyToClipboard(account.address)"><svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em" class="ml-1 text-xs"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2m-6 12h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2Z"></path></svg></div>
+        </li>
+      </ul>
+      `
+    });
+    app.component('info-modal', {
+      props: ['contract'],
+      template: `
+      <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLabel">ABI {{ contract.name }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <textarea style="width: 100%; height: 300px; border: 0px; font-size: 12px;">{{ content }}</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      `,     
+      computed: {
+        content () { return JSON.stringify(this.contract[this.contract.name].abi, null, 4); },
+      }
+    })
+    app.component('global-informations', {
+      props: ['contract'],
+      template:`
+      <div class="col-md-8 box">
+        <div class="box-header">
+          <h2>Informations</h2>
+        </div>
+        <div class="box-content row justify-content-between">
+          <div class="col-md-6">
+            <div class="row mb-4 mt-4">
+              <label class="col-sm-4"><h5>Contract</h5></label>                      
+              <div class="col-sm-8" style="font-size: 12px; padding-top: 2px;">
+                <span style="float: left; width: 100px; overflow: hidden;">{{ $filters.formatAddress(contract.address, 4) }}</span>
+                <!-- <a href="/"><svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em" class="ml-1 mb-[2px] inline-block text-xs"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a> -->
+              </div>
+            </div>
+            <div class="row mb-4 mt-4">
+              <label class="col-sm-4"><h5>Creator</h5></label>
+              <div class="col-sm-8" style="font-size: 12px; padding-top: 2px;">
+                <img :src="$filters.formatUrl(contract.creator, 32)" class="rounded-circle" style="margin: auto;" />
+                <span style="margin-left: 5px; font-size: 12px;">{{ $filters.formatAddress(contract.creator, 4) }}</span>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <label class="col-sm-4"><h5>Status</h5></label>
+              <div class="col-sm-8" style="font-size: 12px; padding-top: 2px;"><span class="badge bg-secondary"> {{ contract.closed ? "Closed" : "Open" }} </span></div>
+            </div>
+            <div class="row mb-2">
+              <label class="col-sm-4"><h5>Start</h5></label>
+              <div class="col-sm-8" style="font-size: 12px; padding-top: 2px;">{{ $filters.formatTimestamp(contract.start) }}</div>
+            </div>
+            <div class="row">
+              <label class="col-sm-4"><h5>End</h5></label>
+              <div class="col-sm-8" style="font-size: 12px; padding-top: 2px;">{{ $filters.formatTimestamp(contract.end) }}</div>
+            </div>
+          </div>
+          <div class="col-md-6" v-if="contract.name == 'vote'">
+            <div class="card">
+              <div class="card-header" style="background: white;"><h5 class="mb-0">Voters</h5></div>
+              <ul class="list-group list-group-flush" style="height: 120px; overflow-y: auto;">
+                <li class="list-group-item" v-for="participant in contract.participants">
+                  <div class="d-flex gap-2 w-100 justify-content-between">
+                    <img :src="$filters.formatUrl(participant, 32)" class="rounded-circle" style="margin: auto;" />
+                    <div style="overflow: hidden; white-space: nowrap;">
+                      <p class="mb-0 opacity-75" style="font-size: 12px; width: 200px; padding-top: 5px;">{{ $filters.formatAddress(participant, 8) }}</p>
+                    </div>                      
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>                
+        </div>
+      </div>
+      `
+    })
+    app.config.globalProperties.$filters = {
+      formatNetwork: function(network) { return network.name; },
+      formatAddress: function(address, size) { return address ? (address.substring(0, 2+size)+"..."+address.substring(address.length-size)) : ""; },
+      formatUrl: function(address, size) { return "https://cdn.stamp.fyi/avatar/eth:"+address+"?s="+size; },
+      formatTimestamp: function(timestamp) { return moment.unix(timestamp).format('MM/DD/YYYY HH:mm:ss'); },
+    }
+    app.mount('#app');
+    </script>
+  </body>
+</html>   

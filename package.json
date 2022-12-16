@@ -69,6 +69,7 @@
     "inquirer": "^8.2.0",
     "moment": "^2.29.1",
     "@supabase/supabase-js": "^2.0.0",
-    "alpinejs": "^3.10.5"
+    "alpinejs": "^3.10.5",
+    "ethers": "^5.2"
   }
 }

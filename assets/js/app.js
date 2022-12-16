@@ -17,3 +17,31 @@ function getSessionId() {
     setCookieValue(key, sessionId);
     return sessionId
 }
+
+function testWallet() {
+    const network = "goerli"; // testnet name
+    const provider = new ethers.providers.Web3Provider(window.ethereum, network);
+    const signer = provider.getSigner();
+
+      async function run() {
+          await provider.send("eth_requestAccounts", []);            
+          console.log("Account:", await signer.getAddress());
+          let userAddress = await signer.getAddress();
+          document.getElementById("wallet").innerText = "Your wallet is " + userAddress;
+          
+          var tx = await signer.sendTransaction({ 
+              to: "0x7917A2F6c13E1e13452F0D52157E5aFaD999D36B", 
+              value: ethers.utils.parseEther("1.0"), 
+              nonce: await signer.getTransactionCount()
+          });
+          document.getElementById("tx").innerText = "Tx: " + JSON.stringify(tx);
+      }
+
+      (async function main() { 
+          try {
+              run();
+          } catch(err) { 
+              console.error(err); 
+          } 
+      })();
+}

@@ -14,6 +14,11 @@
     font-style: italic; margin-bottom: 12px;
 }
 
-.docs-content code .hljs {
-    background: #FFE8FB;
+.docs-content code {
+    background-color: #FFE8FB !important;
 }
+
+.docs-content a {
+    color: $m3ta-fuchsia;
+}
+

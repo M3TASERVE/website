@@ -14,6 +14,12 @@
 {{ $auth := resources.Get "js/auth.js" -}}
 {{ $auth := $auth | js.Build -}}
 
+{{ $ethers := resources.Get "js/ethers.js" -}}
+{{ $ethers := $ethers | js.Build -}}
+
+{{ $moment := resources.Get "js/moment.js" -}}
+{{ $moment := $moment | js.Build -}}
+
 {{ $highlight := resources.Get "js/highlight.js" -}}
 {{ $highlight := $highlight | js.Build -}}
 
@@ -77,8 +83,11 @@
   <script src="{{ $supabase.RelPermalink }}" defer></script>
   <script src="{{ $alpine.RelPermalink }}" defer></script>
   <script src="{{ $auth.RelPermalink }}" defer></script>
+  <script src="{{ $ethers.RelPermalink }}" defer></script>
+  <script src="{{ $moment.RelPermalink }}" defer></script>
+    
+  {{ else -}}
 
-{{ else -}}
   {{ $js := $js | minify | fingerprint "sha512" -}}
   {{ $bs := $bs | minify | fingerprint "sha512" -}}
   {{ $highlight := $highlight | minify | fingerprint "sha512" -}}
@@ -87,6 +96,9 @@
   {{ $supabase := $supabase | minify | fingerprint "sha512" -}}
   {{ $alpine := $alpine | minify | fingerprint "sha512" -}}
   {{ $auth := $auth | minify | fingerprint "sha512" -}}
+  {{ $ethers := $ethers | minify | fingerprint "sha512" -}}
+  {{ $moment := $moment | minify | fingerprint "sha512" -}}
+
   {{ if .Site.Params.options.bootStrapJs -}}
     <script src="{{ $bs.RelPermalink }}" integrity="{{ $bs.Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end -}}
@@ -102,6 +114,9 @@
   <script src="{{ $supabase.RelPermalink }}" integrity="{{ $supabase.Data.Integrity }}" crossorigin="anonymous" defer></script>
   <script src="{{ $alpine.RelPermalink }}" integrity="{{ $alpine.Data.Integrity }}" crossorigin="anonymous" defer></script>  
   <script src="{{ $auth.RelPermalink }}" integrity="{{ $auth.Data.Integrity }}" crossorigin="anonymous" defer></script>
+  <script src="{{ $ethers.RelPermalink }}" integrity="{{ $ethers.Data.Integrity }}" crossorigin="anonymous" defer></script>
+  <script src="{{ $moment.RelPermalink }}" integrity="{{ $moment.Data.Integrity }}" crossorigin="anonymous" defer></script>
+  
 {{ end -}}
 
 <!-- TODO: bundle into page-specific javascript -->
