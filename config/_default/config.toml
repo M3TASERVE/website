@@ -66,7 +66,7 @@ rel  = "sitemap"
     tabWidth = 4
   [markup.tableOfContents]
     ordered = true
-    endLevel = 3
+    endLevel = 1
     startLevel = 1
 
 [sitemap]

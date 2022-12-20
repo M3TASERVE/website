@@ -17,7 +17,7 @@ toc: true
 - [Conclusion](#conclusion)
 -->
 
-# What is Remix ?
+# What is Remix?
 
 Remix is an open-source, web and desktop IDE for Ethereum development. 
 It is the easiest development tool to get started with building on Ethereum, and has a huge collection of plugins to extend its experience. 
@@ -34,7 +34,7 @@ In the left sidebar, you can switch between the `File Explorer`, the `Solidity C
 In the bottom, there is an output panel, which displays output from your compilation, your deployments, and your function calls. 
 In the middle is where you will edit code. Currently it displays the home screen of the IDE, but once we open a file it will become the code editor.
 
-# How to test your projects ?
+# How to test your projects?
 
 For the next projects, you will be provided with a user interface to test your Smart Contract.
 You can start by using Remix to test calls and transactions however to check the compliance of the contract to a required interface we propose to use a simple UI implemetation to interact with the contract.

@@ -1,6 +1,8 @@
 {{ $currentPage := . -}}
 {{ range .Site.Menus.courses -}}
   {{- $active := or (eq $currentPage.RelPermalink .URL) ($currentPage.HasMenuCurrent "courses" .) -}}
+  {{- $currentCourse := ($currentPage.HasMenuCurrent "courses" .) -}}
+  {{ if $currentCourse -}}
   {{- $collapsible := eq .Name "Reference" }}
   <h3>
     {{ if $collapsible -}}
@@ -34,5 +36,6 @@
     </li>
     {{ end -}}
   </ul>
+  {{ end -}}
   {{ end -}}
 {{ end -}}

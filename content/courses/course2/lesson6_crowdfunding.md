@@ -7,7 +7,7 @@ menu:
   courses:
     parent: "101-solidity"
 weight: 26
-toc: true
+toc: false
 submit: true
 ---
 
