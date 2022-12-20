@@ -130,3 +130,25 @@ body.dark .toggle-dark {
   display: block;
   color: $pink-500;
 }
+
+.app h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin: 0px;
+}
+
+.app .btn-tertiary {
+  background: #E126C3 !important;
+  color: $white;
+}
+
+.app .btn-tertiary:hover {
+  color: $white;
+}
+
+.app .btn-outline-secondary:hover {
+  color: $white;
+}
+
+.app .loader {
+  border-top: 16px solid #E126C3;
+}
+
