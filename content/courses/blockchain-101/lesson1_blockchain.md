@@ -1,13 +1,13 @@
 ---
 title: '🕮 Lesson 1 - Blockchain'
 version: '✔️ v1.0'
-slug: "lesson1"
+slug: "blockchain"
 draft: false
 summary: "quick summary"
 number: 1
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 11
 toc: true
 ---

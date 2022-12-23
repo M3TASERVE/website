@@ -25,3 +25,16 @@
 .docs-content .btn {
     color: $white;
 }
+
+.course-menu-link-parent {
+    position: relative;
+    width: 90%;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.course-card {
+    padding: 20px;
+}

@@ -1,7 +1,16 @@
 ---
-title: 'Course 1 : Learn Blockchain basics'
-weight: 1
+title: '📃 Dashboard'
+version: '✔️ v1.0'
+slug: "dashboard"
+draft: false
+summary: "quick summary"
+number: 1
+weight: 10
+toc: false
+dashboard: true
 ---
+
+# Course 1 : Learn Blockchain basics
 
 Course target: to learn how blockchain works and what it can do
 

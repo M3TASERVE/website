@@ -1,11 +1,11 @@
 ---
 title: '🏆 Lesson 7 - Challenge'
 version: '❌ v1.0'
-slug: "lesson7"
+slug: "challenge"
 number: 7
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 27
 toc: false
 submit: true

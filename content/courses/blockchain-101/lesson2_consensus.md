@@ -1,11 +1,11 @@
 ---
 title: '🕮 Lesson 2 - Consensus'
 version: '✔️ v1.0'
-slug: "lesson2"
+slug: "consensus"
 number: 2
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 12
 toc: true
 ---

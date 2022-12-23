@@ -30,6 +30,7 @@ Alpine.data('user', () => ({
     progression: {},
     submitted: {},
     loaded: false,
+    sent: false,
     msg: "",
     form: {
         email: { value: "", errorMessage: "" },

@@ -1,11 +1,11 @@
 ---
 title: '🕮 Lesson 1 - EVM'
 version: '✔️ v1.0'
-slug: "lesson1"
+slug: "evm"
 number: 1
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 21
 toc: true
 ---

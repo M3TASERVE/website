@@ -1,11 +1,11 @@
 ---
 title: '🕮 Lesson 7 - Web3'
 version: '✔️ v1.0'
-slug: "lesson7"
+slug: "web3"
 number: 7
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 17
 toc: true
 ---

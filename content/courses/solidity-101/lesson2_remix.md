@@ -1,11 +1,11 @@
 ---
 title: '💻 Lesson 2 - Remix IDE'
 version: '✔️ v1.0'
-slug: "lesson2"
+slug: "remix"
 number: 2
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 22
 toc: true
 ---

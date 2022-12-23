@@ -1,11 +1,11 @@
 ---
 title: '🚀 Lesson 6 - Project Crowdfunding'
 version: '✔️ v1.0'
-slug: "lesson6"
+slug: "crowdfunding"
 number: 6
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 26
 toc: false
 submit: true

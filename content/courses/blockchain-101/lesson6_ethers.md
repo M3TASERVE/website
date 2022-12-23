@@ -1,11 +1,11 @@
 ---
 title: '💻 Lesson 6 - Ethers.js'
 version: '✔️ v1.0'
-slug: "lesson6"
+slug: "ethers"
 number: 6
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 16
 toc: true
 ---

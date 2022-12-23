@@ -24,15 +24,10 @@
   <ul id="{{ .Name }}-children" class="list-unstyled{{ if and $collapsible }} collapse{{ end }}{{ if $active }} show{{ end }}" x-data="user()" x-init="retrieve()">
     {{ range .Children -}}
     {{- $active := or ($currentPage.IsMenuCurrent "courses" .) ($currentPage.HasMenuCurrent "courses" .) -}}
-    <li class="ps-1 pe-1">
-      <a class="docs-link{{ if $active }} active{{ end }}" href="{{ .URL | relURL }}">
-        <span style="vertical-align: middle">{{ .Name }}</span>
-        {{ if .Page.Params.pro -}}
-          <i class="bi bi-star-fill" style="font-size: 0.6rem; vertical-align: middle"></i>
-        {{ end -}}
-        <template x-if="loaded && progression[{{ .Weight }}]"><span class="float-end">✔️</span></template>
-				<template x-if="loaded && !progression[{{ .Weight }}]"><span class="float-end">❌</span></template>
-      </a>
+    <li class="ps-1 pe-1" style="list-style: none;">
+      <span class="course-menu-link-parent"><a class="docs-link{{ if $active }} active{{ end }}" href="{{ .URL | relURL }}" placeholder="{{ .Name }}">{{ .Name }}</a></span>
+      <template x-if="loaded && progression[{{ .Weight }}]"><span class="float-end">✅</span></template>
+      <template x-if="loaded && !progression[{{ .Weight }}]"><span class="float-end">⬜</span></template>
     </li>
     {{ end -}}
   </ul>

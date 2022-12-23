@@ -17,9 +17,9 @@
 				{{ range where $currentPage.Site.RegularPages.ByWeight "Section" "courses" }}
 				{{ if eq .Params.menu.courses.parent $currentCourse }}
 				<li style="list-style: none;" class="pe-6">
-					<a href="{{ .RelPermalink }}">{{ .Params.title | title }}</a>				
-					<template x-if="loaded && progression[{{ .Params.weight }}]"><span class="float-end">✔️</span></template>
-					<template x-if="loaded && !progression[{{ .Params.weight }}]"><span class="float-end">❌</span></template>
+					<span class="course-menu-link-parent"><a href="{{ .RelPermalink }}" placeholder="{{ .Params.title }}">{{ .Params.title | title }}</a></span>
+					<template x-if="loaded && progression[{{ .Params.weight }}]"><span class="float-end">✅</span></template>
+					<template x-if="loaded && !progression[{{ .Params.weight }}]"><span class="float-end">⬜</span></template>
 				</li>
 				{{ end }}
 				{{ end }}

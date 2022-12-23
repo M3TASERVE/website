@@ -1,11 +1,11 @@
 ---
 title: '🕮 Lesson 5 -  Solidity standards'
 version: '✔️ v1.0'
-slug: "lesson5"
+slug: "standards"
 number: 5
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 25
 toc: true
 ---

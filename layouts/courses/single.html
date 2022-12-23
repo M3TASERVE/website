@@ -1,5 +1,33 @@
 {{ define "main" }}
 	<div class="row flex-xl-nowrap">
+		{{ if .Params.dashboard -}}
+		<main class="docs-content col-lg-4 mx-xl-auto" x-data="user()" x-init="retrieve()">
+			<h1 class="text-center mt-6 mb-7">{{ .Title }}</h1>			
+			{{ $currentPage := . }}
+			{{ $currentParent := .Params.menu.courses.parent }}
+			{{- range .Site.Menus.courses -}}			
+			{{ $currentCourse := .Name }}
+			{{ if eq $currentParent $currentCourse }}
+			<div class="course-card">
+				<h3><a href="#" class="primary text-secondary">{{ .Name }}</a></h3>
+				<div class="divider"></div>
+				<ul class="mt-4">
+				{{ range where $currentPage.Site.RegularPages.ByWeight "Section" "courses" }}
+				{{ if eq .Params.menu.courses.parent $currentCourse }}
+				<li style="list-style: none;" class="pe-6">
+					<span class="course-menu-link-parent"><a href="{{ .RelPermalink }}" placeholder="{{ .Params.title }}">{{ .Params.title | title }}</a></span>
+					<template x-if="loaded && progression[{{ .Params.weight }}]"><span class="float-end">✅</span></template>
+					<template x-if="loaded && !progression[{{ .Params.weight }}]"><span class="float-end">⬜</span></template>
+				</li>
+				{{ end }}
+				{{ end }}
+				</ul>
+			</div>
+			{{ end }}
+			{{ end }}
+		</main>
+		{{ else -}}
+
 		<div class="docs-sidebar{{ if ne .Site.Params.options.navbarSticky true }} docs-sidebar-top{{ end }} d-none d-lg-block col-xl-2">
 			<nav {{ if eq .Site.Params.menu.section.collapsibleSidebar false }}id="sidebar-default" {{ end }}class="docs-links" aria-label="Main navigation">
 				{{ partial "sidebar/docs-menu.html" . }}
@@ -10,11 +38,13 @@
 			{{ partial "sidebar/docs-toc.html" . }}
 		</nav>
 		{{ end -}}
+
 		{{ if .Params.toc -}}
 		<main class="docs-content col-lg-11 col-xl{{ if eq .Site.Params.options.fullWidth false }}-9{{ end }}">
 		{{ else -}}
 		<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
 		{{ end -}}
+
 			{{ if .Site.Params.options.breadCrumb -}}
 				<!-- https://discourse.gohugo.io/t/breadcrumb-navigation-for-highly-nested-content/27359/6 -->
 				<nav aria-label="breadcrumb">
@@ -48,7 +78,7 @@
 					<h2>Submit Practical</h2>
 					<p>Send your smart contract address to pass this level.</p>
 					<template x-if="submitted[{{ $currentWeight }}] == null">
-					<div class="input-group">
+					<div class="input-group" style="width: 70%;">
 						<select required="" aria-required="true" class="input-group-text" x-model="submission.network">
 							<option value="Ethereum Goerli" selected>Ethereum Goerli</option>
 							<option value="Ethereum Rinkeby">Ethereum Rinkeby</option>
@@ -97,5 +127,7 @@
 			{{ end -}}
 			-->
 		</main>
+		{{ end -}}
+
 	</div>
 {{ end }}

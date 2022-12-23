@@ -1,11 +1,11 @@
 ---
 title: '🕮 Lesson 3 - Wallets'
 version: '✔️ v1.0'
-slug: "lesson3"
+slug: "wallets"
 number: 3
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 13
 toc: true
 ---

@@ -1,11 +1,11 @@
 ---
 title: '🕮 Lesson 3 - Solidity basis'
 version: '✔️ v1.0'
-slug: "lesson3"
+slug: "basis"
 number: 3
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 23
 toc: true
 ---

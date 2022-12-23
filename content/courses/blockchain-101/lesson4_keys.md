@@ -1,11 +1,11 @@
 ---
 title: '💻 Lesson 4 - Cryptographic Keys'
 version: '✔️ v1.0'
-slug: "lesson4"
+slug: "keys"
 number: 4
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 14
 toc: true
 ---

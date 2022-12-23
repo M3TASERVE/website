@@ -1,11 +1,11 @@
 ---
 title: '🚀 Lesson 4 - Project Vote'
 version: '✔️ v1.0'
-slug: "lesson4"
+slug: "vote"
 number: 4
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 24
 toc: false
 submit: true

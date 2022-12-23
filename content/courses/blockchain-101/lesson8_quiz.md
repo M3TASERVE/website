@@ -1,11 +1,11 @@
 ---
 title: '✍️ Lesson 8 - Final questionnaire (1/2)'
 version: '✔️ v1.0'
-slug: "lesson8"
+slug: "quiz"
 number: 8
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 18
 toc: true
 type: quizz

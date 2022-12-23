@@ -1,11 +1,11 @@
 ---
 title: '💻 Lesson 5 - MetaMask'
 version: '✔️ v1.0'
-slug: "lesson5"
+slug: "metamask"
 number: 5
 menu:
   courses:
-    parent: "101-blockchain"
+    parent: "Blockchain 101"
 weight: 15
 toc: true
 ---

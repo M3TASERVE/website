@@ -1,11 +1,11 @@
 ---
 title: '✍️ Lesson 8 - Final questionnaire (2/2)'
 version: '✔️ v1.0'
-slug: "lesson8"
+slug: "quiz"
 number: 8
 menu:
   courses:
-    parent: "101-solidity"
+    parent: "Solidity 101"
 weight: 28
 toc: true
 type: quizz

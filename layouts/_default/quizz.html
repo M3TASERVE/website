@@ -1,26 +1,17 @@
 {{ define "main" }}
 	<div class="row flex-xl-nowrap">
-		<div class="docs-sidebar{{ if ne .Site.Params.options.navbarSticky true }} docs-sidebar-top{{ end }} d-none d-lg-block col-xl-2">
+		<div class="docs-sidebar{{ if ne .Site.Params.options.navbarSticky true }} docs-sidebar-top{{ end }} d-none d-lg-block col-xl-2" style="margin-top: 4rem !important;">
 			<nav {{ if eq .Site.Params.menu.section.collapsibleSidebar false }}id="sidebar-default" {{ end }}class="docs-links" aria-label="Main navigation">
 				{{ partial "sidebar/docs-menu.html" . }}
 			</nav>
 		</div>
-		{{ if ne .Params.toc false -}}
-		<nav class="docs-toc{{ if ne .Site.Params.options.navbarSticky true }} docs-toc-top{{ end }} d-none d-xl-block col-xl-2" aria-label="Secondary navigation">
-			{{ partial "sidebar/docs-toc.html" . }}
-		</nav>
-		{{ end -}}
 
-		{{ if .Params.toc -}}
-		<main class="docs-content col-lg-11 col-xl{{ if eq .Site.Params.options.fullWidth false }}-9{{ end }}">
-		{{ else -}}
-		<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
-		{{ end -}}
+        <main class="docs-content col-lg-11 col-xl-9 mx-xl-auto" x-data="user()">
 
             <h1 class="text-center mt-6 mb-6">{{ .Title }}</h1>
 			<p class="lead">{{ .Params.lead | safeHTML }}</p>
 
-            <div x-data="user()" x-init="fetch('{{ .Params.quizz }}').then(response=> { if (!response.ok) console.log(`Something went wrong: ${response.status} - ${response.statusText}`); return response.json(); }).then(data => quizz.entries = data.entries)">
+            <div x-init="fetch('{{ .Params.quizz }}').then(response=> { if (!response.ok) console.log(`Something went wrong: ${response.status} - ${response.statusText}`); return response.json(); }).then(data => quizz.entries = data.entries)">
             {{ $currentWeight := .Weight -}}
             <template class="mt-6 mb-6" x-if="logged">
             <div>
@@ -37,7 +28,7 @@
                         </div>
                     </div>
                 </template>
-                <button type="button" class="btn btn-primary btn-tertiary" @click="publish({{ $currentWeight }}, 'quizz', { answers: quizz.answers }); publish({{ $currentWeight }}, 'progress', {})">Send</button>
+                <button type="button" class="btn btn-primary btn-tertiary" @click="publish({{ $currentWeight }}, 'quizz', { answers: quizz.answers }); publish({{ $currentWeight }}, 'progress', {}); sent = true;">Send</button>
             </div>
             </template>
             <template class="mt-6 mb-6" x-if="!logged">
@@ -48,7 +39,30 @@
             </template>
             </div>
 			
-            <!-- {{ partial "main/docs-navigation.html" . }} -->
+            <div class="docs-navigation d-flex justify-content-between">
+                {{ $currentWeight := .Weight -}}
+                {{ $pages := where site.RegularPages "Section" .Section -}}
+                {{ with $pages.Next . -}}
+                    <a href="{{ .RelPermalink }}">
+                        <div class="card my-1">
+                            <div class="card-body py-2">
+                                &larr; {{ .Title }}
+                            </div>
+                        </div>
+                    </a>
+                {{ end -}}                
+                {{ with $pages.Prev . -}}
+                <template x-if="sent">
+                    <a class="ms-auto" href="{{ .RelPermalink }}" @click="publish({{ $currentWeight }}, 'progress', {})">
+                        <div class="card my-1">
+                            <div class="card-body py-2">
+                                {{ .Title }} &rarr;
+                            </div>
+                        </div>
+                    </a>
+                </template>
+                {{ end -}}
+            </div>
             
 		</main>
 	</div>
